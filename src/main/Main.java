@@ -1,9 +1,13 @@
 package main;
 
+import donjon.Salle;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+//		new Salle();
+		Salle.GenerationSalle();
 
 	}
 
