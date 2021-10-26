@@ -1,13 +1,12 @@
 package main;
 
-import donjon.Salle;
+import donjon.GestionDonjon;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Salle salle = new Salle();
-		salle.GenerationSalle();
+		GestionDonjon gestionDonjon = new GestionDonjon();
 
 	}
 
