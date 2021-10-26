@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-//		new Salle();
-		Salle.GenerationSalle();
+		Salle salle = new Salle();
+		salle.GenerationSalle();
 
 	}
 
