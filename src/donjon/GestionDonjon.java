@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class GestionDonjon {
 
 	private String[][] donjon;
+	Joueur joueur = new Joueur();
 	
 	public GestionDonjon() {
 		Scanner in = new Scanner(System.in);
@@ -15,7 +16,8 @@ public class GestionDonjon {
 		System.out.print("Saisir le nombre de colonnes du donjon: ");
 		int colonnes = in.nextInt();
 
-		GenerationDonjon(lignes, colonnes);
+		generationDonjon(lignes, colonnes);
+		menuJoueur();
 	}
 
 	public String objectMonsterOrVoidGeneration() {
@@ -31,7 +33,7 @@ public class GestionDonjon {
 		return oMV;
 	}
 	
-	public void GenerationDonjon(int lignes, int colonnes) {
+	public void generationDonjon(int lignes, int colonnes) {
 
 		// déclaration de la matrice
 		String[][] donjon = new String[lignes][colonnes];
@@ -180,18 +182,39 @@ public class GestionDonjon {
 	
 	public void menuJoueur() {
         System.out.println("");
-        System.out.println("----------------------------------------  MENU D'ACTIONS  ----------------------------------------");
+        System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("A - Regarder");
-//        if(monsterHP <= 0) { // total des HP de tout les monstres
-            System.out.println("B - Se déplacer"); // fonction déplacer + affichage carte
-            
-//        }
+        System.out.println("B - Se déplacer");
         System.out.println("C - Combattre");
         System.out.println("D - Utiliser un objet");
-        System.out.println("----------------------------------------  MENU D'ACTIONS  ----------------------------------------");
+        System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("");
         System.out.println("Que voulez-vous faire ?");
-	}
+
+        Scanner in = new Scanner(System.in);
+        String choix = in.next();
+        choixJoueur(choix);
+    }
+
+    public void choixJoueur(String choix) {
+        switch(choix.toUpperCase()) {
+	        case "A":
+	        	System.out.println("a");
+	        	break;
+	        case "B":
+//        		if(monsterHP <= 0) { // total des HP de tout les monstres
+		            joueur.deplacer(donjon);
+		            affichageCarte(donjon);
+//        		}
+	        	break;
+	        case "C":
+	        	System.out.println("c");
+	        	break;
+	        case "D":
+	        	System.out.println("d");
+	        	break;
+        }
+    }	
 	
 	public static int randInt(int min, int max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
