@@ -15,24 +15,39 @@ public class GestionDonjon {
 		System.out.print("Saisir le nombre de colonnes du donjon: ");
 		int colonnes = in.nextInt();
 
-		GenerationSalle(lignes, colonnes);
+		GenerationDonjon(lignes, colonnes);
+	}
+
+	public String objectMonsterOrVoidGeneration() {
+		String oMV = "0";
+		int randomCase = randInt(0, 100);
+		if(randomCase < 10) {
+			oMV = "M";
+		} else if ((randomCase > 10) && (randomCase < 15)) {
+			oMV = "O";
+		} else {
+			oMV = " ";
+		}
+		return oMV;
 	}
 	
-	public void GenerationSalle(int lignes, int colonnes) {
+	public void GenerationDonjon(int lignes, int colonnes) {
 
 		// déclaration de la matrice
 		String[][] donjon = new String[lignes][colonnes];
 		
 		for (int i = 0; i < lignes; i++) {
 			for (int j = 0; j < colonnes; j++) {
-				donjon[i][j] = "X";
+				donjon[i][j] = "#";
 			}
 		}
 		
 		int i = 1;
 		int j = 1;
 		boolean stop = false;
-		donjon[1][1] = " ";
+		
+		donjon[1][1] = "P";
+		
 		while (!stop) {
 			if (i == lignes - 1 || j == colonnes - 1) {
 				stop = true;
@@ -40,9 +55,8 @@ public class GestionDonjon {
 			}
 			switch (randInt(2, 3)) {
 			case 2:
-				if (donjon[i][j + 1].equals("X")) {
-					donjon[i][j + 1] = " ";
-					
+				if (donjon[i][j + 1].equals("#")) {
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
 				}
 				if(j == colonnes-2) {
 					donjon[i][j + 1] = "S";
@@ -50,8 +64,8 @@ public class GestionDonjon {
 				j++;
 				break;
 			case 3:
-				if (donjon[i + 1][j].equals("X")) {
-					donjon[i + 1][j] = " ";
+				if (donjon[i + 1][j].equals("#")) {
+					donjon[i + 1][j] = objectMonsterOrVoidGeneration();
 				
 				}
 				if(i == lignes-2) {
@@ -59,7 +73,6 @@ public class GestionDonjon {
 				}
 				i++;
 			}
-			
 
 		}
 		i = lignes - 2;
@@ -74,20 +87,20 @@ public class GestionDonjon {
 			switch (randInt(1, 2)) {
 			case 1:
 				if (i != 1) {
-					if (donjon[i - 1][j].equals("X")) {
-						donjon[i - 1][j] = " ";
+					if (donjon[i - 1][j].equals("#")) {
+						donjon[i - 1][j] = objectMonsterOrVoidGeneration();
 						
 					}
 					i = i - 1;
 				} 
 				break;
 			case 2:
-				if (donjon[i][j + 1].equals("X")) {
-					donjon[i][j + 1] = " ";
+				if (donjon[i][j + 1].equals("#")) {
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
 					
 				}
 				if(j == colonnes-2) {
-					donjon[i][j + 1] = "X";
+					donjon[i][j + 1] = "#";
 				}
 				j++;
 			
@@ -109,15 +122,6 @@ public class GestionDonjon {
 //		in.close();
 	}
 	
-	public void affichageCarte(String[][] donjon) {
-		for (int i = 0; i < donjon.length; i++) {
-			for (int k = 0; k < donjon[0].length; k++) {
-				System.out.print(donjon[i][k] + " ");
-			}
-			System.out.println();
-		}
-	}
-	
 	public void veines(int lignes, int colonnes, String donjon[][]) {
 		int i = randInt(2, lignes-2);
 		int j = randInt(2, colonnes-2);
@@ -133,7 +137,7 @@ public class GestionDonjon {
 			switch (randInt(1,4)) {
 			case 1:
 				if (i != 1) {
-					if (donjon[i - 1][j].equals("X")) {
+					if (donjon[i - 1][j].equals("#")) {
 						donjon[i - 1][j] = " ";
 					}
 					i = i - 1;
@@ -141,7 +145,7 @@ public class GestionDonjon {
 				break;
 			case 2:
 				if(j != colonnes -2 ) {
-					if (donjon[i][j + 1].equals("X")) {
+					if (donjon[i][j + 1].equals("#")) {
 						donjon[i][j + 1] = " ";
 					}
 					j++;
@@ -149,14 +153,14 @@ public class GestionDonjon {
 				break;
 			case 3:
 				if(i != lignes -2) {
-					if (donjon[i + 1][j].equals("X")) {
+					if (donjon[i + 1][j].equals("#")) {
 						donjon[i + 1][j] = " ";		
 					}
 					i++;
 				}
 				break;
 			case 4:
-				if(donjon[i][j-1].equals("X")) {
+				if(donjon[i][j-1].equals("#")) {
 					donjon[i][j-1] = " ";
 				}
 				break;
@@ -165,6 +169,30 @@ public class GestionDonjon {
 		
 	}
 
+	public void affichageCarte(String[][] donjon) {
+		for (int i = 0; i < donjon.length; i++) {
+			for (int k = 0; k < donjon[0].length; k++) {
+				System.out.print(donjon[i][k] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public void menuJoueur() {
+        System.out.println("");
+        System.out.println("----------------------------------------  MENU D'ACTIONS  ----------------------------------------");
+        System.out.println("A - Regarder");
+//        if(monsterHP <= 0) { // total des HP de tout les monstres
+            System.out.println("B - Se déplacer"); // fonction déplacer + affichage carte
+            
+//        }
+        System.out.println("C - Combattre");
+        System.out.println("D - Utiliser un objet");
+        System.out.println("----------------------------------------  MENU D'ACTIONS  ----------------------------------------");
+        System.out.println("");
+        System.out.println("Que voulez-vous faire ?");
+	}
+	
 	public static int randInt(int min, int max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 		return x;
