@@ -4,12 +4,6 @@ import java.util.Scanner;
 
 public class Salle {
 
-	private boolean mur;
-
-	public Salle() {
-//		mur = GenerationSalle();
-	}
-
 	public void GenerationSalle() {
 
 		Scanner in = new Scanner(System.in);
@@ -20,7 +14,7 @@ public class Salle {
 		System.out.print("Saisir le nombre de colonnes du donjon: ");
 		int colonnes = in.nextInt();
 
-		// d�claration de la matrice
+		// declaration de la matrice
 		String[][] donjon = new String[lignes][colonnes];
 
 		for (int i = 0; i < lignes; i++) {
@@ -32,7 +26,7 @@ public class Salle {
 		int i = 1;
 		int j = 1;
 		boolean stop = false;
-
+		donjon[1][1] = " ";
 		while (!stop) {
 			if (i == lignes - 1 || j == colonnes - 1) {
 				stop = true;
@@ -86,6 +80,9 @@ public class Salle {
 					donjon[i][j + 1] = " ";
 					
 				}
+				if(j == colonnes-2) {
+					donjon[i][j + 1] = "X";
+				}
 				j++;
 			
 				break;
@@ -110,8 +107,8 @@ public class Salle {
 		in.close();
 	}
 	public void veines(int lignes, int colonnes, String donjon[][]) {
-		int i = randInt(1, lignes-2);
-		int j = randInt(1, colonnes-2);
+		int i = randInt(2, lignes-2);
+		int j = randInt(2, colonnes-2);
 		int max = 0;
 			if(lignes < colonnes) {
 				max = lignes;
