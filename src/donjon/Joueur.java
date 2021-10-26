@@ -3,13 +3,13 @@ package donjon;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
-	private static int i;
-	private static int j;
+	private int i;
+	private int j;
 	
 	public Joueur() {
 		super();
-		Joueur.i = 1;
-		Joueur.j = 1;
+		this.i = 1;
+		this.j = 1;
 	}
 
 	@Override
