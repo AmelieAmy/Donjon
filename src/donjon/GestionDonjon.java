@@ -36,7 +36,7 @@ public class GestionDonjon {
 	public void generationDonjon(int lignes, int colonnes) {
 
 		// déclaration de la matrice
-		String[][] donjon = new String[lignes][colonnes];
+		donjon = new String[lignes][colonnes];
 		
 		for (int i = 0; i < lignes; i++) {
 			for (int j = 0; j < colonnes; j++) {
@@ -199,7 +199,9 @@ public class GestionDonjon {
     public void choixJoueur(String choix) {
         switch(choix.toUpperCase()) {
 	        case "A":
-	        	System.out.println("a");
+	        	// afficher le nombre d'objet, le type et le nombre de monstre
+	        	System.out.println("méthode regarder"); 
+	        	menuJoueur();
 	        	break;
 	        case "B":
 //        		if(monsterHP <= 0) { // total des HP de tout les monstres
@@ -208,10 +210,12 @@ public class GestionDonjon {
 //        		}
 	        	break;
 	        case "C":
-	        	System.out.println("c");
+	        	System.out.println("méthode combattre");
+	        	menuJoueur();
 	        	break;
 	        case "D":
-	        	System.out.println("d");
+	        	System.out.println("méthode utiliser un objet");
+	        	menuJoueur();
 	        	break;
         }
     }	
