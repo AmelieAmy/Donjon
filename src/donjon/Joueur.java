@@ -17,13 +17,13 @@ public class Joueur extends Personnage {
 		// TODO Auto-generated method stub
 		
 	}
-	public void deplacer(String donjon[][], Scanner in) {
+	public void deplacer(String donjon[][]) {
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
 		System.out.println("2 = droite");
 		System.out.println("3 = bas");
 		System.out.println("4 = gauche");
-		
+		Scanner in = new Scanner(System.in);
 		int response = in.nextInt();
 		
 		switch(response) {
