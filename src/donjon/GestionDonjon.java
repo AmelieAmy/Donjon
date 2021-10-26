@@ -32,7 +32,7 @@ public class GestionDonjon {
 		int i = 1;
 		int j = 1;
 		boolean stop = false;
-
+		donjon[1][1] = " ";
 		while (!stop) {
 			if (i == lignes - 1 || j == colonnes - 1) {
 				stop = true;
@@ -86,6 +86,9 @@ public class GestionDonjon {
 					donjon[i][j + 1] = " ";
 					
 				}
+				if(j == colonnes-2) {
+					donjon[i][j + 1] = "X";
+				}
 				j++;
 			
 				break;
@@ -116,8 +119,8 @@ public class GestionDonjon {
 	}
 	
 	public void veines(int lignes, int colonnes, String donjon[][]) {
-		int i = randInt(1, lignes-2);
-		int j = randInt(1, colonnes-2);
+		int i = randInt(2, lignes-2);
+		int j = randInt(2, colonnes-2);
 		int max = 0;
 			if(lignes < colonnes) {
 				max = lignes;
