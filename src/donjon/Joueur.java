@@ -17,7 +17,7 @@ public class Joueur extends Personnage {
 		// TODO Auto-generated method stub
 		
 	}
-	public void deplacer(String donjon[][]) {
+	public String deplacer(String donjon[][]) {
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
 		System.out.println("2 = droite");
@@ -25,13 +25,14 @@ public class Joueur extends Personnage {
 		System.out.println("4 = gauche");
 		Scanner in = new Scanner(System.in);
 		int response = in.nextInt();
-		
+		String nextSalle = " ";
 		switch(response) {
 		case 1:
 			if(donjon[i - 1][j].equals("#")) {
 				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				nextSalle = donjon[i - 1][j];
 				donjon[i - 1][j] = "P";
 				i = i - 1;
 			}
@@ -41,6 +42,7 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				nextSalle = donjon[i][j+1];
 				donjon[i][j+1] = "P";
 				j = j + 1;
 			}
@@ -50,6 +52,7 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				nextSalle = donjon[i + 1][j];
 				donjon[i + 1][j] = "P";
 				i = i + 1;
 			}
@@ -59,6 +62,7 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				nextSalle = donjon[i][j-1];
 				donjon[i][j-1] = "P";
 				j = j - 1;
 			}
@@ -66,6 +70,7 @@ public class Joueur extends Personnage {
 		default:
 			break;
 		}
+		return nextSalle;
 	}
 
 }
