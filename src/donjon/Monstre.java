@@ -11,10 +11,11 @@ public class Monstre extends Personnage {
 
 	@Override
 	public void attaquer(Personnage perso) {
-		// TODO Auto-generated method stub
 		
 	}
+	public String toString() {
+		return "vie = " + vie + " - force = " + force + " - piece = " + piece;
+	}
 
-	
 
 }

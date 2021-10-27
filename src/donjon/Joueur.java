@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Joueur extends Personnage {
 	private int i;
 	private int j;
-	
+
 	public Joueur(int vie, int force, int piece) {
 		super(vie, force, piece);
 		this.i = 1;

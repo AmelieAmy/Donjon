@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class GestionDonjon {
 
 	public String[][] donjon;
-	Joueur joueur;
+	Personnage joueur = new Joueur(10, 5, 0);
     ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
     ArrayList<String> ObjetsList = new ArrayList<String>();
 	
@@ -208,7 +208,7 @@ public class GestionDonjon {
 	        	break;
 	        case "B":
 //        		if(monstersHP <= 0) { // total des HP de tout les monstres
-	        		String roomType = joueur.deplacer(donjon);
+	        		String roomType = ((Joueur)joueur).deplacer(donjon);
 		    		monstersAndObjectsGeneration(roomType);
 		            affichageCarte(donjon);
 		        	menuJoueur();
@@ -227,32 +227,22 @@ public class GestionDonjon {
     }	
 
     public void monstersAndObjectsGeneration(String roomType) {
-    	
+
     	if(roomType.contentEquals("O")) {
-        	for (int i = 0; i < randInt(1, 3); i++) { // g�n�re un nombre un nombre d'item de 1 � 3.
-            	ObjetsList.add(randomisedObjects()); // g�n�re le type d'item
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre d'item de 1 � 3.
+            	ObjetsList.add(randomisedObjects()); // genere le type d'item
     		}
     	}
-//    	if(roomType.equals("M")) {
-//        	for (int i = 0; i < randInt(1, 3); i++) { // g�n�re un nombre un nombre de monstre de 1 � 3.
-//        		MonstersList.add(new Monstre().setForce(force);); // g�n�re le type d'item
-//    		}
-//    	}
-//    	System.out.println(ObjetsList);
+    	
+    	if(roomType.equals("M")) {
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre de monstre de 1 � 3.
+        		MonstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
+    		}
+    	}
+    	
+    	System.out.println(ObjetsList);
+    	System.out.println(MonstersList);
     }
-
-//	public Monstre randomisedMonster() {
-//		Monstre result;
-//		int random = randInt(0, 60);
-//		if(random < 20) {
-//			result = new Monstre();
-//		} else if ((random > 21) && (random < 40)) {
-//			result = "Potion de vie";
-//		} else {
-//			result = "Potion de force";
-//		}
-//		return result;
-//	}
 
 	public String randomisedObjects() {
 		String result = "0";
