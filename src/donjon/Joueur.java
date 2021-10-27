@@ -54,7 +54,8 @@ public class Joueur extends Personnage {
 			}
 			else {
 				if(donjon[i - 1][j].equals("S")) {
-					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i - 1][j];
 				donjon[i][j] = " ";
@@ -68,7 +69,8 @@ public class Joueur extends Personnage {
 			}
 			else {
 				if(donjon[i][j + 1].equals("S")) {
-					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i][j+1];
 				donjon[i][j] = " ";
@@ -82,7 +84,8 @@ public class Joueur extends Personnage {
 			}
 			else {
 				if(donjon[i + 1][j].equals("S")) {
-					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i + 1][j];
 				donjon[i][j] = " ";
@@ -92,11 +95,12 @@ public class Joueur extends Personnage {
 			break;
 		case 4:
 			if(donjon[i][j-1].equals("#")) {
-				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
+				System.out.println("Un mur se presente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
 				if(donjon[i][j-1].equals("S")) {
-					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i][j-1];
 				donjon[i][j] = " ";
@@ -169,11 +173,11 @@ public class Joueur extends Personnage {
     		System.out.println("Vous regardez autour de vous...");
     		System.out.println("A vos pieds se trouve une " + objetsList.get(0) + ".");
             System.out.println(" ");
-    		if(objetsList.size() > 0) {
+    		if(objetsList.size() > 1) {
         		System.out.println("Un peu plus loin vous trouvez aussi une " + objetsList.get(1) + ".");
                 System.out.println(" ");
     		}
-    		if(objetsList.size() > 1) {
+    		if(objetsList.size() > 2) {
         		System.out.println("Decidement la chance vous souris, sur le chemin vous trebuchez sur une " + objetsList.get(2) + ".");
                 System.out.println(" ");
     		}
