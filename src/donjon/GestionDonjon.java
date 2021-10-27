@@ -214,7 +214,7 @@ public class GestionDonjon {
 	        	combat();
 	        	break;
 	        case "D":
-	        	((Joueur)joueur).useObject(donjon, objetsList, joueur);
+	        	((Joueur)joueur).useObject(donjon, objetsList);
 	    		affichageCarte(donjon);
 	        	menuJoueur();
 	        	break;
