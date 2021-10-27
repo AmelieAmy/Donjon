@@ -39,7 +39,7 @@ public class GestionDonjon {
 	
 	public void generationDonjon(int lignes, int colonnes) {
 
-		// d�claration de la matrice
+		// declaration de la matrice
 		donjon = new String[lignes][colonnes];
 		
 		for (int i = 0; i < lignes; i++) {
@@ -248,7 +248,7 @@ public class GestionDonjon {
     	}
     	if(monstersList.get(indexMonstre).getVie() <= 0) {
     		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
-    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pièces d'or vous avez maintenant " + joueur.getPiece() + " pièces d'or");
+    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pieces d'or vous avez maintenant " + joueur.getPiece() + " pieces d'or");
     		monstersList.remove(indexMonstre);
     	}
     	else {

@@ -1,7 +1,5 @@
 package donjon;
 
-import java.util.ArrayList;
-
 public abstract class Personnage {
 	protected int vie;
 	protected int force;
