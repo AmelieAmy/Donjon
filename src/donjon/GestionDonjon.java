@@ -29,7 +29,7 @@ public class GestionDonjon {
 		int randomCase = randInt(0, 100);
 		if(randomCase < 10) {
 			oMV = "M";
-		} else if ((randomCase > 10) && (randomCase < 15)) {
+		} else if ((randomCase > 10) && (randomCase < 50)) {
 			oMV = "O";
 		} else {
 			oMV = " ";
@@ -215,8 +215,7 @@ public class GestionDonjon {
 	        	combat();
 	        	break;
 	        case "D":
-//	        	System.out.println("m�thode utiliser un objet");
-	        	((Joueur)joueur).useObject(donjon, ObjetsList);
+	        	((Joueur)joueur).useObject(donjon, objetsList, joueur);
 	        	menuJoueur();
 	        	break;
         }
@@ -309,7 +308,7 @@ public class GestionDonjon {
 		int random = randInt(0, 60);
 		if(random < 20) {
 			result = "Bourse d'or";
-		} else if ((random > 21) && (random < 40)) {
+		} else if ((random > 20) && (random < 40)) {
 			result = "Potion de vie";
 		} else {
 			result = "Potion de force";

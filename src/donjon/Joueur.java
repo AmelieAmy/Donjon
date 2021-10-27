@@ -1,5 +1,6 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
@@ -109,33 +110,57 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 	
-	public void useObject(String donjon[][],ArrayList<String> ObjetsList) {
+	public void useObject(String donjon[][],ArrayList<String> objetsList,Personnage joueur) {
 		boolean onGround=true;
 		Scanner in = new Scanner(System.in);
 		
 		
-		if (!ObjetsList.isEmpty()) {
-			System.out.println("Il y a " + ObjetsList +" par terre");
+		if (!objetsList.isEmpty()) {
+			System.out.println("Il y a " + objetsList +" par terre");
 			System.out.println("Voulez-vous ramasser le(s) objet(s) ?(oui ou non)");
 			String response=in.next();
 			if(response.equals("oui")) {
 				do {
-				System.out.println("Que voulez-vous ramasser ?");
-				}while(!onGround);
+					System.out.println("Que voulez-vous ramasser ?");
+					System.out.println(objetsList);
+					int objet=in.nextInt();
+					objetsList.get(objet);
+					
+					if(objetsList.get(objet).equals("Bourse d'or")) {
+						int rand=randInt(10,50);
+						joueur.setPiece(joueur.getPiece() + rand);
+						System.out.println("Vous récuperez "+rand+ " pieces.\nVous en avez au total "+joueur.getPiece());
+						objetsList.remove(objet);
+						
+					}else if(objetsList.get(objet).equals("Potion de vie")) {
+						int rand=randInt(2,5);
+						joueur.setVie(joueur.getVie() + rand);
+						System.out.println("Vous récuperez "+rand+ " de vie.\nVous en avez au total "+joueur.getVie());
+						objetsList.remove(objet);
+						
+					}else if(objetsList.get(objet).equals("Potion de force")) {
+						int rand=randInt(1,3);
+						joueur.setForce(joueur.getForce() + rand);
+						System.out.println("Vous avez booste de "+rand+ " votre force.\nVous en avez au total "+joueur.getForce());
+						objetsList.remove(objet);
+					}else {
+						break;
+					}
+					
+					if(objetsList.isEmpty()) {
+						onGround=false;
+					}
+				}while(onGround);
 			}
 		}else {
 			System.out.println("Il n'y a rien par terre");
 		}
-		
-		
-//		System.out.println("P : "+donjon[i][j]);
-//		System.out.println("I : "+i);
-//		System.out.println("J : "+j);
-		
-		
-		
-		
-		
+	
+	}
+	
+	public static int randInt(int min, int max) {
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+		return x;
 	}
 
 }
