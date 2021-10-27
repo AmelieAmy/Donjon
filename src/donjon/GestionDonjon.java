@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GestionDonjon {
 
-	private String[][] donjon;
+	public String[][] donjon;
 	Joueur joueur = new Joueur();
 	
 	public GestionDonjon() {
@@ -35,7 +35,7 @@ public class GestionDonjon {
 	
 	public void generationDonjon(int lignes, int colonnes) {
 
-		// déclaration de la matrice
+		// dï¿½claration de la matrice
 		donjon = new String[lignes][colonnes];
 		
 		for (int i = 0; i < lignes; i++) {
@@ -184,7 +184,7 @@ public class GestionDonjon {
         System.out.println("");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("A - Regarder");
-        System.out.println("B - Se déplacer");
+        System.out.println("B - Se dï¿½placer");
         System.out.println("C - Combattre");
         System.out.println("D - Utiliser un objet");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
@@ -200,7 +200,7 @@ public class GestionDonjon {
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	// afficher le nombre d'objet, le type et le nombre de monstre
-	        	System.out.println("méthode regarder"); 
+	        	System.out.println("mï¿½thode regarder"); 
 	        	menuJoueur();
 	        	break;
 	        case "B":
@@ -211,11 +211,11 @@ public class GestionDonjon {
 //        		}
 	        	break;
 	        case "C":
-	        	System.out.println("méthode combattre");
+	        	System.out.println("mï¿½thode combattre");
 	        	menuJoueur();
 	        	break;
 	        case "D":
-	        	System.out.println("méthode utiliser un objet");
+	        	System.out.println("mï¿½thode utiliser un objet");
 	        	menuJoueur();
 	        	break;
         }
