@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Joueur extends Personnage {
 	private int i;
 	private int j;
-	
+
 	public Joueur(int vie, int force, int piece) {
 		super(vie, force, piece);
 		this.i = 1;
@@ -14,8 +14,18 @@ public class Joueur extends Personnage {
 	}
 
 	@Override
-	public void attaquer() {
-		// TODO Auto-generated method stub
+	public void attaquer(Personnage perso) {
+		Monstre monstre = null;
+		if(perso instanceof Monstre) {
+			 monstre = (Monstre)perso;
+		}
+		System.out.println("Vous attaquez le monstre avec une force de " + force);
+		monstre.setVie(monstre.getVie() - force);
+		if(monstre.getVie() <= 0) {
+			System.out.println("Le monstre est mort");
+		} else {
+			System.out.println("La vie du monstre est maintenant de " + monstre.getVie());
+		}
 	}
 	public String deplacer(String donjon[][]) {
 		

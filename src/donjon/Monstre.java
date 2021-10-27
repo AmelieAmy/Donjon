@@ -1,5 +1,7 @@
 package donjon;
 
+import java.util.ArrayList;
+
 public class Monstre extends Personnage {
 
 	public Monstre(int vie, int force, int piece) {
@@ -8,9 +10,12 @@ public class Monstre extends Personnage {
 	}
 
 	@Override
-	public void attaquer() {
-		// TODO Auto-generated method stub
+	public void attaquer(Personnage perso) {
 		
 	}
+	public String toString() {
+		return "vie = " + vie + " - force = " + force + " - piece = " + piece;
+	}
+
 
 }
