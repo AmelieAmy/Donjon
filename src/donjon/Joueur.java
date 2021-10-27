@@ -32,6 +32,9 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se presente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				if(donjon[i - 1][j].equals("S")) {
+					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+				}
 				nextSalle = donjon[i - 1][j];
 				donjon[i][j] = " ";
 				donjon[i - 1][j] = "P";
@@ -43,6 +46,9 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se presente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				if(donjon[i][j + 1].equals("S")) {
+					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+				}
 				nextSalle = donjon[i][j+1];
 				donjon[i][j] = " ";
 				donjon[i][j+1] = "P";
@@ -54,10 +60,13 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se presente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				if(donjon[i + 1][j].equals("S")) {
+					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+				}
 				nextSalle = donjon[i + 1][j];
 				donjon[i][j] = " ";
 				donjon[i + 1][j] = "P";
-				i = i + 1;
+				i = i + 1;	
 			}
 			break;
 		case 4:
@@ -65,6 +74,9 @@ public class Joueur extends Personnage {
 				System.out.println("Un mur se présente devant vous, vous ne pouvez pas avancer dans cette direction");
 			}
 			else {
+				if(donjon[i][j-1].equals("S")) {
+					System.out.println("Gagné ! Vous avez terminé le niveau avec " + vie + " points de vie et " + piece + " pièces d'or.");
+				}
 				nextSalle = donjon[i][j-1];
 				donjon[i][j] = " ";
 				donjon[i][j-1] = "P";
