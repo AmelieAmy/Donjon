@@ -231,27 +231,27 @@ public class GestionDonjon {
     public void bandit() {
     	int prix = randInt(300, 800);
     	String objet = randomisedObjects();
-    	if(contenuSalle.equals("B")){
-    		System.out.println("Il y a un bandit manchot dans le coin ... Il réclame " + prix + " pièces pour vous donner un objet aléatoire. Souhaitez vous lui donner ? ( oui | non )");
+    	if(contenuSalle.equals("$")){
+    		System.out.println("Il y a un bandit manchot dans le coin ... Il reclame " + prix + " pieces pour vous donner un objet aleatoire. Souhaitez vous lui donner ? ( oui | non )");
     		if(in.next().equalsIgnoreCase("oui")) {
     			if(joueur.getPiece() < prix) {
     				System.out.println("Vous n'avez pas assez d'or. Le bandit disparait dans les profondeur du donjon...");
     			}
     			else {
-    				System.out.println("Vous donnez " + prix + " pièces d'or au bandit , il vous reste " + joueur.getPiece() + " pièces d'or");
+    				System.out.println("Vous donnez " + prix + " pieces d'or au bandit , il vous reste " + joueur.getPiece() + " pieces d'or");
     				if(randInt(1,10) == 1) {
-    					System.out.println("Le bandit s'enfuit avec votre argent sans rien vous donner ! Quel idée de faire confiance à un bandit...");
+    					System.out.println("Le bandit s'enfuit avec votre argent sans rien vous donner ! Quel idee de faire confiance à un bandit...");
     				}
     				else {
-    					System.out.println("Le bandit vous donne " + objet + " que vous utilisez immédiatement");
+    					System.out.println("Le bandit vous donne " + objet + " que vous utilisez immediatement");
     					if(objet.equals("Bourse d'or")) {
     						System.out.println("Le bandit vous donne une bourse d'or !");
     						int rand=randInt(1,1000);
     						if(rand < prix) {
-    							System.out.println("Quelle arnaque ! Cette bourse est plus petite que celle que vous lui avez donné...");
+    							System.out.println("Quelle arnaque ! Cette bourse est plus petite que celle que vous lui avez donne...");
     						}
     						joueur.setPiece(joueur.getPiece() + rand);
-    						System.out.println(rand + " pièces d'or. Vous avez maintenant " + joueur.getPiece() + " pièces d'or.");
+    						System.out.println(rand + " pieces d'or. Vous avez maintenant " + joueur.getPiece() + " pieces d'or.");
     					}
     					if(objet.equals("Potion de vie")) {
     						System.out.println("Le bandit vous donne une potion de vie !");
@@ -263,7 +263,7 @@ public class GestionDonjon {
     						System.out.println("Le bandit vous donne une potion de force !");
     						int rand=randInt(0,5);
     						if(rand == 0) {
-    							System.out.println("C'était de l'eau ... il vous a bien eu");
+    							System.out.println("C'etait de l'eau ... il vous a bien eu");
     						}
     						else {
     						joueur.setForce(joueur.getForce() + rand);
@@ -307,7 +307,7 @@ public class GestionDonjon {
     	}
     	if(monstersList.get(indexMonstre).getVie() <= 0) {
     		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
-    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pieces d'or vous avez maintenant " + joueur.getPiece() + " pieces d'or");
+    		System.out.println("Vous avez recupere " + monstersList.get(indexMonstre).getPiece() + " pieces d'or vous avez maintenant " + joueur.getPiece() + " pieces d'or");
     		monstersList.remove(indexMonstre);
     	}
     	else {

@@ -1,7 +1,5 @@
 package donjon;
 
-import java.util.ArrayList;
-
 public class Monstre extends Personnage {
 
 	public Monstre(int vie, int force, int piece) {
