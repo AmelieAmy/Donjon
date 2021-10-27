@@ -184,7 +184,7 @@ public class GestionDonjon {
         System.out.println("");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("A - Regarder");
-        System.out.println("B - Se d�placer");
+        System.out.println("B - Se deplacer");
         System.out.println("C - Combattre");
         System.out.println("D - Utiliser un objet");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
@@ -200,7 +200,7 @@ public class GestionDonjon {
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	// afficher le nombre d'objet, le type et le nombre de monstre
-	        	System.out.println("m�thode regarder"); 
+	        	System.out.println("methode regarder"); 
 	        	menuJoueur();
 	        	break;
 	        case "B":
@@ -211,11 +211,11 @@ public class GestionDonjon {
 //        		}
 	        	break;
 	        case "C":
-	        	System.out.println("m�thode combattre");
+	        	System.out.println("methode combattre");
 	        	menuJoueur();
 	        	break;
 	        case "D":
-	        	System.out.println("m�thode utiliser un objet");
+	        	System.out.println("methode utiliser un objet");
 	        	menuJoueur();
 	        	break;
         }
