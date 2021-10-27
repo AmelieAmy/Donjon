@@ -1,11 +1,15 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionDonjon {
 
 	public String[][] donjon;
+	int lignes;
+	int colonnes;
 	Joueur joueur = new Joueur();
+	ArrayList<Integer> positionObject = new ArrayList<Integer>();
 	
 	public GestionDonjon() {
 		Scanner in = new Scanner(System.in);
@@ -20,13 +24,15 @@ public class GestionDonjon {
 		menuJoueur();
 	}
 
-	public String objectMonsterOrVoidGeneration() {
+	public String objectMonsterOrVoidGeneration(int i, int j) {
 		String oMV = "0";
 		int randomCase = randInt(0, 100);
 		if(randomCase < 10) {
 			oMV = "M";
 		} else if ((randomCase > 10) && (randomCase < 15)) {
 			oMV = "O";
+			positionObject.add(i);
+			positionObject.add(j);
 		} else {
 			oMV = " ";
 		}
@@ -58,7 +64,8 @@ public class GestionDonjon {
 			switch (randInt(2, 3)) {
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i,j);
+					
 				}
 				if(j == colonnes-2) {
 					donjon[i][j + 1] = "S";
@@ -67,7 +74,7 @@ public class GestionDonjon {
 				break;
 			case 3:
 				if (donjon[i + 1][j].equals("#")) {
-					donjon[i + 1][j] = objectMonsterOrVoidGeneration();
+					donjon[i + 1][j] = objectMonsterOrVoidGeneration(i, j);
 				
 				}
 				if(i == lignes-2) {
@@ -90,7 +97,7 @@ public class GestionDonjon {
 			case 1:
 				if (i != 1) {
 					if (donjon[i - 1][j].equals("#")) {
-						donjon[i - 1][j] = objectMonsterOrVoidGeneration();
+						donjon[i - 1][j] = objectMonsterOrVoidGeneration(i, j);
 						
 					}
 					i = i - 1;
@@ -98,7 +105,7 @@ public class GestionDonjon {
 				break;
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i, j);
 					
 				}
 				if(j == colonnes-2) {
@@ -216,7 +223,7 @@ public class GestionDonjon {
 	        	break;
 	        case "D":
 //	        	System.out.println("m�thode utiliser un objet");
-	        	joueur.useObject();
+	        	joueur.useObject(donjon, lignes, colonnes,positionObject);
 	        	menuJoueur();
 	        	break;
         }

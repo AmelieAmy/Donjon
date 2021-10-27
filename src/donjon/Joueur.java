@@ -1,5 +1,6 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
@@ -78,17 +79,45 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 	
-	public void useObject(String donjon[][],int lignes, int colonnes) {
+	public void useObject(String donjon[][],int lignes, int colonnes,ArrayList<Integer> positionObject) {
+		boolean onGround=false;
+		int k;
 		for(int i=0;i<lignes-1;i++) {
+			System.out.println(i);
 			for(int j=0;j<colonnes-1;j++) {
 				if(donjon[i][j] == "P") {
+					System.out.println("if "+j);
 					break;
 				}
+				System.out.println(j);
 			}
 			if(donjon[i][j] == "P") {
 				break;
 			}
 		}
+		
+		
+		for(k=0;k<positionObject.size();k=k+2) {
+			if(donjon[i][j].equals(donjon[positionObject.get(k)][positionObject.get(k+1)])) {
+				System.out.println("Il y a un objet par terre");
+				
+				break;
+			}else if(k==positionObject.size()-2 && !donjon[i][j].equals(donjon[positionObject.get(k)][positionObject.get(k+1)])) {
+				System.out.println("Il n'y a rien par terre");
+				break;
+			}
+		}
+		
+		
+//		System.out.println("P : "+donjon[i][j]);
+//		System.out.println("I : "+i);
+//		System.out.println("J : "+j);
+//		System.out.println("O : "+donjon[positionObject.get(k)][positionObject.get(k+1)]);
+		
+		
+		
+		
+		
 	}
 
 }
