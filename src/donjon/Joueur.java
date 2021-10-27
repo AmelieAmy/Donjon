@@ -110,7 +110,7 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 	
-	public void useObject(String donjon[][],ArrayList<String> objetsList,Personnage joueur) {
+	public void useObject(String donjon[][],ArrayList<String> objetsList) {
 		boolean onGround=true;
 		Scanner in = new Scanner(System.in);
 		
@@ -121,27 +121,27 @@ public class Joueur extends Personnage {
 			String response=in.next();
 			if(response.equals("oui")) {
 				do {
-					System.out.println("Que voulez-vous ramasser ?");
+					System.out.println("Que voulez-vous ramasser ? (indice de l'objet)");
 					System.out.println(objetsList);
 					int objet=in.nextInt();
 					objetsList.get(objet);
 					
 					if(objetsList.get(objet).equals("Bourse d'or")) {
 						int rand=randInt(10,50);
-						joueur.setPiece(joueur.getPiece() + rand);
-						System.out.println("Vous récuperez "+rand+ " pieces.\nVous en avez au total "+joueur.getPiece());
+						setPiece(getPiece() + rand);
+						System.out.println("Vous récuperez "+rand+ " pieces.\nVous en avez au total "+getPiece());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de vie")) {
 						int rand=randInt(2,5);
-						joueur.setVie(joueur.getVie() + rand);
-						System.out.println("Vous récuperez "+rand+ " de vie.\nVous en avez au total "+joueur.getVie());
+						setVie(getVie() + rand);
+						System.out.println("Vous récuperez "+rand+ " de vie.\nVous en avez au total "+getVie());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de force")) {
 						int rand=randInt(1,3);
-						joueur.setForce(joueur.getForce() + rand);
-						System.out.println("Vous avez booste de "+rand+ " votre force.\nVous en avez au total "+joueur.getForce());
+						setForce(getForce() + rand);
+						System.out.println("Vous avez booste de "+rand+ " votre force.\nVous en avez au total "+getForce());
 						objetsList.remove(objet);
 					}else {
 						break;
