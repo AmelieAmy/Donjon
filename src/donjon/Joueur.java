@@ -1,5 +1,6 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
@@ -13,8 +14,18 @@ public class Joueur extends Personnage {
 	}
 
 	@Override
-	public void attaquer() {
-		// TODO Auto-generated method stub
+	public void attaquer(Personnage perso) {
+		Monstre monstre = null;
+		if(perso instanceof Monstre) {
+			 monstre = (Monstre)perso;
+		}
+		System.out.println("Vous attaquez le monstre avec une force de " + force);
+		monstre.setVie(monstre.getVie() - force);
+		if(monstre.getVie() <= 0) {
+			System.out.println("Le monstre est mort");
+		} else {
+			System.out.println("La vie du monstre est maintenant de " + monstre.getVie());
+		}
 	}
 	public String deplacer(String donjon[][]) {
 		

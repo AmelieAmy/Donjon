@@ -214,6 +214,7 @@ public class GestionDonjon {
 		    		monstersAndObjectsGeneration(roomType);
 		            affichageCarte(donjon);
 		        	menuJoueur();
+		
 //        		}
 	        	break;
 	        case "C":
@@ -230,13 +231,13 @@ public class GestionDonjon {
     public void monstersAndObjectsGeneration(String roomType) {
 
     	if(roomType.contentEquals("O")) {
-        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre d'item de 1 à 3.
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre d'item de 1 ï¿½ 3.
             	ObjetsList.add(randomisedObjects()); // genere le type d'item
     		}
     	}
     	
     	if(roomType.equals("M")) {
-        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre de monstre de 1 à 3.
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre de monstre de 1 ï¿½ 3.
         		MonstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
     		}
     	}
