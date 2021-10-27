@@ -121,7 +121,7 @@ public class Joueur extends Personnage {
 			String response=in.next();
 			if(response.equals("oui")) {
 				do {
-					System.out.println("Que voulez-vous ramasser ?");
+					System.out.println("Que voulez-vous ramasser ? (indice de l'objet)");
 					System.out.println(objetsList);
 					int objet=in.nextInt();
 					objetsList.get(objet);

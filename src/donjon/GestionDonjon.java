@@ -29,7 +29,7 @@ public class GestionDonjon {
 		int randomCase = randInt(0, 100);
 		if(randomCase < 10) {
 			oMV = "M";
-		} else if ((randomCase > 10) && (randomCase < 50)) {
+		} else if ((randomCase > 10) && (randomCase < 15)) {
 			oMV = "O";
 		} else {
 			oMV = " ";
