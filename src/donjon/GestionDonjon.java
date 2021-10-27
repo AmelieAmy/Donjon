@@ -248,13 +248,14 @@ public class GestionDonjon {
     	}
     	if(monstersList.get(indexMonstre).getVie() <= 0) {
     		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
-    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pièces vous avez maintenant " + joueur.getPiece() + " pièces");
+    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pièces d'or vous avez maintenant " + joueur.getPiece() + " pièces d'or");
     		monstersList.remove(indexMonstre);
     	}
     	else {
     		monstersList.get(indexMonstre).attaquer(joueur);
     		if(joueur.getVie() <= 0) {
     			System.out.println("Vous etes mort. GAME OVER.");
+    			System.exit(0);
     		}
     		else {
     			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
