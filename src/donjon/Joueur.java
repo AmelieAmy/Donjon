@@ -169,11 +169,11 @@ public class Joueur extends Personnage {
     		System.out.println("Vous regardez autour de vous...");
     		System.out.println("A vos pieds se trouve une " + objetsList.get(0) + ".");
             System.out.println(" ");
-    		if(objetsList.size() > 0) {
+    		if(objetsList.size() > 1) {
         		System.out.println("Un peu plus loin vous trouvez aussi une " + objetsList.get(1) + ".");
                 System.out.println(" ");
     		}
-    		if(objetsList.size() > 1) {
+    		if(objetsList.size() > 2) {
         		System.out.println("Decidement la chance vous souris, sur le chemin vous trebuchez sur une " + objetsList.get(2) + ".");
                 System.out.println(" ");
     		}
