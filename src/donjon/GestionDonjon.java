@@ -254,14 +254,14 @@ public class GestionDonjon {
     	else {
     		monstersList.get(indexMonstre).attaquer(joueur);
     		if(joueur.getVie() <= 0) {
-    			System.out.println("Vous êtes mort. GAME OVER.");
+    			System.out.println("Vous etes mort. GAME OVER.");
     		}
     		else {
     			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
     		}
     	}
     	if(monstersList.isEmpty()) {
-    		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais accéder à la salle suivante !");
+    		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais acceder a la salle suivante !");
     	}
     	menuJoueur();
     }
