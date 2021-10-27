@@ -100,7 +100,7 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 	
-	public void useObject(String donjon[][],int lignes, int colonnes,ArrayList<String> ObjetsList) {
+	public void useObject(String donjon[][],ArrayList<String> ObjetsList) {
 		boolean onGround=true;
 		Scanner in = new Scanner(System.in);
 		

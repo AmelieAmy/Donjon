@@ -29,7 +29,7 @@ public class GestionDonjon {
 		int randomCase = randInt(0, 100);
 		if(randomCase < 10) {
 			oMV = "M";
-		} else if ((randomCase > 10) && (randomCase < 50)) {
+		} else if ((randomCase > 10) && (randomCase < 15)) {
 			oMV = "O";
 		} else {
 			oMV = " ";
@@ -215,7 +215,7 @@ public class GestionDonjon {
 	        	break;
 	        case "D":
 //	        	System.out.println("m�thode utiliser un objet");
-	        	((Joueur)joueur).useObject(donjon, lignes, colonnes,ObjetsList);
+	        	((Joueur)joueur).useObject(donjon, ObjetsList);
 	        	menuJoueur();
 	        	break;
         }
@@ -257,7 +257,7 @@ public class GestionDonjon {
     		}
     	}
     	if(MonstersList.isEmpty()) {
-    		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais accéder à la salle suivante !");
+    		System.out.println("Vous avez tue tous les monstres ! Vous pouvez desormais accéder à la salle suivante !");
     	}
     	menuJoueur();
     }
