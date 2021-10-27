@@ -1,5 +1,6 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
@@ -109,4 +110,45 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 
+    public void regarder(String contenuSalle, ArrayList objetsList, ArrayList monstersList) {
+    	if(contenuSalle.equals("O")) {
+            System.out.println(" ");
+    		System.out.println("Vous regardez autour de vous...");
+    		System.out.println("A vos pieds se trouve une " + objetsList.get(0) + ".");
+            System.out.println(" ");
+    		if(objetsList.size() > 0) {
+        		System.out.println("Un peu plus loin vous trouvez aussi une " + objetsList.get(1) + ".");
+                System.out.println(" ");
+    		}
+    		if(objetsList.size() > 1) {
+        		System.out.println("Decidement la chance vous souris, sur le chemin vous trebuchez sur une " + objetsList.get(2) + ".");
+                System.out.println(" ");
+    		}
+    	} else if(contenuSalle.equals("M")) {
+            System.out.println(" ");
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres.");
+    		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes.");
+            System.out.println(" ");
+    		if(monstersList.size() < 1) {
+        		System.out.println("Voici le monstre " + monstersList.get(0) + ".");
+                System.out.println(" ");
+    		} else {
+        		System.out.println("Premier monstre " + monstersList.get(0) + ".");
+                System.out.println(" ");
+    		}
+    		if(monstersList.size() > 0) {
+        		System.out.println("Deuxieme monstre " + monstersList.get(1) + ".");
+                System.out.println(" ");
+    		}
+    		if(monstersList.size() > 1) {
+        		System.out.println("Troisieme monstre " + monstersList.get(2) + ".");
+                System.out.println(" ");
+    		}
+    	} else {
+            System.out.println(" ");
+    		System.out.println("Cette salle semble vide");
+            System.out.println(" ");
+    	}
+    }
+    
 }
