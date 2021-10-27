@@ -246,6 +246,8 @@ public class GestionDonjon {
         	((Joueur)joueur).attaquer(monstersList.get(indexMonstre));
     	}
     	if(monstersList.get(indexMonstre).getVie() <= 0) {
+    		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
+    		System.out.println("Vous avez récuperé " + monstersList.get(indexMonstre).getPiece() + " pièces vous avez maintenant " + joueur.getPiece() + " pièces");
     		monstersList.remove(indexMonstre);
     	}
     	else {
