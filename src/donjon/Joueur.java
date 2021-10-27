@@ -55,6 +55,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i - 1][j].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i - 1][j];
 				donjon[i][j] = " ";
@@ -69,6 +70,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i][j + 1].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i][j+1];
 				donjon[i][j] = " ";
@@ -83,6 +85,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i + 1][j].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i + 1][j];
 				donjon[i][j] = " ";
@@ -97,6 +100,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i][j-1].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					System.exit(0);
 				}
 				nextSalle = donjon[i][j-1];
 				donjon[i][j] = " ";
