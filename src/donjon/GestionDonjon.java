@@ -204,9 +204,10 @@ public class GestionDonjon {
 	        	menuJoueur();
 	        	break;
 	        case "B":
-//        		if(monsterHP <= 0) { // total des HP de tout les monstres
+//        		if(monstersHP <= 0) { // total des HP de tout les monstres
 		            joueur.deplacer(donjon);
 		            affichageCarte(donjon);
+		        	menuJoueur();
 //        		}
 	        	break;
 	        case "C":
