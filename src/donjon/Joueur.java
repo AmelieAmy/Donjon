@@ -18,6 +18,7 @@ public class Joueur extends Personnage {
 		
 	}
 	public String deplacer(String donjon[][]) {
+		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
 		System.out.println("2 = droite");
@@ -33,6 +34,7 @@ public class Joueur extends Personnage {
 			}
 			else {
 				nextSalle = donjon[i - 1][j];
+				donjon[i][j] = " ";
 				donjon[i - 1][j] = "P";
 				i = i - 1;
 			}
@@ -43,6 +45,7 @@ public class Joueur extends Personnage {
 			}
 			else {
 				nextSalle = donjon[i][j+1];
+				donjon[i][j] = " ";
 				donjon[i][j+1] = "P";
 				j = j + 1;
 			}
@@ -53,6 +56,7 @@ public class Joueur extends Personnage {
 			}
 			else {
 				nextSalle = donjon[i + 1][j];
+				donjon[i][j] = " ";
 				donjon[i + 1][j] = "P";
 				i = i + 1;
 			}
@@ -63,6 +67,7 @@ public class Joueur extends Personnage {
 			}
 			else {
 				nextSalle = donjon[i][j-1];
+				donjon[i][j] = " ";
 				donjon[i][j-1] = "P";
 				j = j - 1;
 			}
