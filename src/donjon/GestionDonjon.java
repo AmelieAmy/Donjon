@@ -304,24 +304,25 @@ public class GestionDonjon {
         	System.out.println("Quel monstre attaquer ?");
         	indexMonstre = in.nextInt();
         	((Joueur)joueur).attaquer(monstersList.get(indexMonstre));
-    	}
-    	if(monstersList.get(indexMonstre).getVie() <= 0) {
-    		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
-    		System.out.println("Vous avez recupere " + monstersList.get(indexMonstre).getPiece() + " pieces d'or vous avez maintenant " + joueur.getPiece() + " pieces d'or");
-    		monstersList.remove(indexMonstre);
-    	}
-    	else {
-    		monstersList.get(indexMonstre).attaquer(joueur);
-    		if(joueur.getVie() <= 0) {
-    			System.out.println("Vous etes mort. GAME OVER.");
-    			System.exit(0);
-    		}
-    		else {
-    			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
-    		}
-    	}
-    	if(monstersList.isEmpty()) {
-    		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais acceder a la salle suivante !");
+        	
+        	if(monstersList.get(indexMonstre).getVie() <= 0) {
+        		joueur.setPiece(joueur.getPiece() + monstersList.get(indexMonstre).getPiece());
+        		System.out.println("Vous avez recupere " + monstersList.get(indexMonstre).getPiece() + " pieces d'or vous avez maintenant " + joueur.getPiece() + " pieces d'or");
+        		monstersList.remove(indexMonstre);
+        	}
+        	else {
+        		monstersList.get(indexMonstre).attaquer(joueur);
+        		if(joueur.getVie() <= 0) {
+        			System.out.println("Vous etes mort. GAME OVER.");
+        			System.exit(0);
+        		}
+        		else {
+        			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
+        		}
+        	}
+        	if(monstersList.isEmpty()) {
+        		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais acceder a la salle suivante !");
+        	}
     	}
     	menuJoueur();
     }
