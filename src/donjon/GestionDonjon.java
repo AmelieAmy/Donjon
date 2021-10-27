@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionDonjon {
-
-	public String[][] donjon;
+	Scanner in = new Scanner(System.in);
+	private String[][] donjon;
 	Personnage joueur = new Joueur(10, 5, 0);
     ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
     ArrayList<String> ObjetsList = new ArrayList<String>();
+    String contenuSalle = " ";
+    int indexMonstre = 0;
 	
 	public GestionDonjon() {
-		Scanner in = new Scanner(System.in);
 
 		System.out.print("Saisir le nombre de lignes du donjon : ");
 		int lignes = in.nextInt();
@@ -188,13 +189,12 @@ public class GestionDonjon {
         System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("A - Regarder");
         System.out.println("B - Se deplacer");
-        System.out.println("C - Combattre");
+        System.out.println("C - Attaquer");
         System.out.println("D - Utiliser un objet");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
         System.out.println("");
         System.out.println("Que voulez-vous faire ?");
 
-        Scanner in = new Scanner(System.in);
         String choix = in.next();
         choixJoueur(choix);
     }
@@ -207,17 +207,10 @@ public class GestionDonjon {
 	        	menuJoueur();
 	        	break;
 	        case "B":
-//        		if(monstersHP <= 0) { // total des HP de tout les monstres
-	        		String roomType = ((Joueur)joueur).deplacer(donjon);
-		    		monstersAndObjectsGeneration(roomType);
-		            affichageCarte(donjon);
-		        	menuJoueur();
-		
-//        		}
+	        	deplacer();
 	        	break;
 	        case "C":
-	        	System.out.println("methode combattre");
-	        	menuJoueur();
+	        	combat();
 	        	break;
 	        case "D":
 	        	System.out.println("methode utiliser un objet");
@@ -225,6 +218,46 @@ public class GestionDonjon {
 	        	break;
         }
     }	
+    
+    public void deplacer() {
+    	if(MonstersList.isEmpty()) {
+    		contenuSalle = ((Joueur)joueur).deplacer(donjon);
+    		monstersAndObjectsGeneration(contenuSalle);
+    		}
+    		else {
+    			System.out.println("Il reste des monstres dans la salle. Tuez les pour avancer.");
+    		}
+    		affichageCarte(donjon);
+	        menuJoueur();
+    }
+    
+    public void combat() {
+    	if(contenuSalle != "M") {
+    		System.out.println("Pas de monstre dans la salle !");
+    	}
+    	else {
+        	System.out.println(MonstersList);
+        	System.out.println("Quel monstre attaquer ?");
+        	indexMonstre = in.nextInt();
+        	((Joueur)joueur).attaquer(MonstersList.get(indexMonstre));
+    	}
+    	if(MonstersList.get(indexMonstre).getVie() <= 0) {
+    		MonstersList.remove(indexMonstre);
+    	}
+    	else {
+    		MonstersList.get(indexMonstre).attaquer(joueur);
+    		if(joueur.getVie() <= 0) {
+    			System.out.println("Vous êtes mort. GAME OVER.");
+    		}
+    		else {
+    			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
+    		}
+    	}
+    	if(MonstersList.isEmpty()) {
+    		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais accéder à la salle suivante !");
+    	}
+    	menuJoueur();
+    }
 
     public void monstersAndObjectsGeneration(String roomType) {
 
