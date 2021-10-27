@@ -221,6 +221,7 @@ public class GestionDonjon {
     
     public void deplacer() {
     	if(MonstersList.isEmpty()) {
+    		ObjetsList.clear();
     		contenuSalle = ((Joueur)joueur).deplacer(donjon);
     		monstersAndObjectsGeneration(contenuSalle);
     		}
