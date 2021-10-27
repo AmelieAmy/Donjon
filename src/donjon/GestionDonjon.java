@@ -1,11 +1,14 @@
 package donjon;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionDonjon {
 
 	public String[][] donjon;
-	Joueur joueur = new Joueur();
+	Joueur joueur;
+    ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
+    ArrayList<String> ObjetsList = new ArrayList<String>();
 	
 	public GestionDonjon() {
 		Scanner in = new Scanner(System.in);
@@ -205,7 +208,8 @@ public class GestionDonjon {
 	        	break;
 	        case "B":
 //        		if(monstersHP <= 0) { // total des HP de tout les monstres
-		            joueur.deplacer(donjon);
+	        		String roomType = joueur.deplacer(donjon);
+		    		monstersAndObjectsGeneration(roomType);
 		            affichageCarte(donjon);
 		        	menuJoueur();
 //        		}
@@ -220,7 +224,48 @@ public class GestionDonjon {
 	        	break;
         }
     }	
-	
+
+    public void monstersAndObjectsGeneration(String roomType) {
+    	
+    	if(roomType.contentEquals("O")) {
+        	for (int i = 0; i < randInt(1, 3); i++) { // génère un nombre un nombre d'item de 1 à 3.
+            	ObjetsList.add(randomisedObjects()); // génère le type d'item
+    		}
+    	}
+//    	if(roomType.equals("M")) {
+//        	for (int i = 0; i < randInt(1, 3); i++) { // génère un nombre un nombre de monstre de 1 à 3.
+//        		MonstersList.add(new Monstre().setForce(force);); // génère le type d'item
+//    		}
+//    	}
+//    	System.out.println(ObjetsList);
+    }
+
+//	public Monstre randomisedMonster() {
+//		Monstre result;
+//		int random = randInt(0, 60);
+//		if(random < 20) {
+//			result = new Monstre();
+//		} else if ((random > 21) && (random < 40)) {
+//			result = "Potion de vie";
+//		} else {
+//			result = "Potion de force";
+//		}
+//		return result;
+//	}
+
+	public String randomisedObjects() {
+		String result = "0";
+		int random = randInt(0, 60);
+		if(random < 20) {
+			result = "Bourse d'or";
+		} else if ((random > 21) && (random < 40)) {
+			result = "Potion de vie";
+		} else {
+			result = "Potion de force";
+		}
+		return result;
+	}
+
 	public static int randInt(int min, int max) {
 		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
 		return x;
