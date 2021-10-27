@@ -1,17 +1,20 @@
 package donjon;
 
+import java.util.ArrayList;
+
 public abstract class Personnage {
 	protected int vie;
 	protected int force;
 	protected int piece;
-	
-	public abstract void attaquer();
 	
 	public Personnage(int vie, int force, int piece) {
 		this.vie = vie;
 		this.force = force;
 		this.piece = piece;
 	}
+
+	public abstract void attaquer(Personnage perso);
+
 
 	public int getVie() {
 		return vie;
@@ -36,4 +39,5 @@ public abstract class Personnage {
 	public void setPiece(int piece) {
 		this.piece = piece;
 	}
+
 }
