@@ -8,6 +8,11 @@ public class Monstre extends Personnage {
 	}
 
 	@Override
+	public String toString() {
+		return "vie = " + vie + " - force = " + force + " - piece = " + piece;
+	}
+
+	@Override
 	public void attaquer() {
 		// TODO Auto-generated method stub
 		
