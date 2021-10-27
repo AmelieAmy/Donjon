@@ -10,8 +10,10 @@ public class Monstre extends Personnage {
 	}
 
 	@Override
-	public void attaquer(Personnage perso) {
-		
+	public void attaquer(Personnage joueur) {
+		joueur = (Joueur)joueur;
+		System.out.println("Le monstre contre-attaque avec une force de " + getForce() + " !");
+		joueur.setVie(joueur.getVie() - getForce());
 	}
 	public String toString() {
 		return "vie = " + vie + " - force = " + force + " - piece = " + piece;
