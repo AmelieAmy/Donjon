@@ -11,6 +11,7 @@ public class GestionDonjon {
     ArrayList<String> objetsList = new ArrayList<String>();
     String contenuSalle = " ";
     int indexMonstre = 0;
+	boolean banditMancho = false;
 	
 	public GestionDonjon() {
 
@@ -31,8 +32,13 @@ public class GestionDonjon {
 			oMV = "M";
 		} else if ((randomCase > 10) && (randomCase < 15)) {
 			oMV = "O";
+		} else if ((randomCase > 16) && (randomCase < 18) && !banditMancho) {
+			oMV = "$";
 		} else {
 			oMV = " ";
+		}
+		if(oMV.equals("$")) {
+			banditMancho = true;
 		}
 		return oMV;
 	}
