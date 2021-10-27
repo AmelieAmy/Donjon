@@ -234,11 +234,13 @@ public class GestionDonjon {
     }
     
     public void combat() {
-    	if(contenuSalle != "M") {
+    	if(!contenuSalle.equals("M")) {
     		System.out.println("Pas de monstre dans la salle !");
     	}
     	else {
-        	System.out.println(monstersList);
+        	for(int i = 0; i < monstersList.size(); i++) {
+        		System.out.println("Monstre " + i + " " + monstersList.get(i));
+        	}
         	System.out.println("Quel monstre attaquer ?");
         	indexMonstre = in.nextInt();
         	((Joueur)joueur).attaquer(monstersList.get(indexMonstre));
