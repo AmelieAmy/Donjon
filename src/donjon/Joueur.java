@@ -100,40 +100,28 @@ public class Joueur extends Personnage {
 		return nextSalle;
 	}
 	
-	public void useObject(String donjon[][],int lignes, int colonnes,ArrayList<Integer> positionObject) {
-		boolean onGround=false;
-		int k;
-		for(int i=0;i<lignes-1;i++) {
-			System.out.println(i);
-			for(int j=0;j<colonnes-1;j++) {
-				if(donjon[i][j] == "P") {
-					System.out.println("if "+j);
-					break;
-				}
-				System.out.println(j);
-			}
-			if(donjon[i][j] == "P") {
-				break;
-			}
-		}
+	public void useObject(String donjon[][],int lignes, int colonnes,ArrayList<String> ObjetsList) {
+		boolean onGround=true;
+		Scanner in = new Scanner(System.in);
 		
 		
-		for(k=0;k<positionObject.size();k=k+2) {
-			if(donjon[i][j].equals(donjon[positionObject.get(k)][positionObject.get(k+1)])) {
-				System.out.println("Il y a un objet par terre");
-				
-				break;
-			}else if(k==positionObject.size()-2 && !donjon[i][j].equals(donjon[positionObject.get(k)][positionObject.get(k+1)])) {
-				System.out.println("Il n'y a rien par terre");
-				break;
+		if (!ObjetsList.isEmpty()) {
+			System.out.println("Il y a " + ObjetsList +" par terre");
+			System.out.println("Voulez-vous ramasser le(s) objet(s) ?(oui ou non)");
+			String response=in.next();
+			if(response.equals("oui")) {
+				do {
+				System.out.println("Que voulez-vous ramasser ?");
+				}while(!onGround);
 			}
+		}else {
+			System.out.println("Il n'y a rien par terre");
 		}
 		
 		
 //		System.out.println("P : "+donjon[i][j]);
 //		System.out.println("I : "+i);
 //		System.out.println("J : "+j);
-//		System.out.println("O : "+donjon[positionObject.get(k)][positionObject.get(k+1)]);
 		
 		
 		

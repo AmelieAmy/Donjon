@@ -8,7 +8,6 @@ public class GestionDonjon {
 	public String[][] donjon;
 	int lignes;
 	int colonnes;
-	ArrayList<Integer> positionObject = new ArrayList<Integer>();
 	Personnage joueur = new Joueur(10, 5, 0);
     ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
     ArrayList<String> ObjetsList = new ArrayList<String>();
@@ -31,10 +30,8 @@ public class GestionDonjon {
 		int randomCase = randInt(0, 100);
 		if(randomCase < 10) {
 			oMV = "M";
-		} else if ((randomCase > 10) && (randomCase < 15)) {
+		} else if ((randomCase > 10) && (randomCase < 50)) {
 			oMV = "O";
-			positionObject.add(i);
-			positionObject.add(j);
 		} else {
 			oMV = " ";
 		}
@@ -229,7 +226,7 @@ public class GestionDonjon {
 	        	break;
 	        case "D":
 //	        	System.out.println("m�thode utiliser un objet");
-	        	joueur.useObject(donjon, lignes, colonnes,positionObject);
+	        	((Joueur)joueur).useObject(donjon, lignes, colonnes,ObjetsList);
 	        	menuJoueur();
 	        	break;
         }
