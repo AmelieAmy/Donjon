@@ -276,9 +276,6 @@ public class GestionDonjon {
         		monstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
     		}
     	}
-    	
-    	System.out.println(objetsList);
-    	System.out.println(monstersList);
     }
 
 	public String randomisedObjects() {

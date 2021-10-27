@@ -127,23 +127,12 @@ public class Joueur extends Personnage {
     	} else if(contenuSalle.equals("M")) {
             System.out.println(" ");
     		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres.");
-    		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes.");
+    		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes :");
             System.out.println(" ");
-    		if(monstersList.size() < 1) {
-        		System.out.println("Voici le monstre " + monstersList.get(0) + ".");
+        	for(int i = 0; i < monstersList.size(); i++) {
+        		System.out.println("Monstre " + i + " " + monstersList.get(i));
                 System.out.println(" ");
-    		} else {
-        		System.out.println("Premier monstre " + monstersList.get(0) + ".");
-                System.out.println(" ");
-    		}
-    		if(monstersList.size() > 0) {
-        		System.out.println("Deuxieme monstre " + monstersList.get(1) + ".");
-                System.out.println(" ");
-    		}
-    		if(monstersList.size() > 1) {
-        		System.out.println("Troisieme monstre " + monstersList.get(2) + ".");
-                System.out.println(" ");
-    		}
+        	}
     	} else {
             System.out.println(" ");
     		System.out.println("Cette salle semble vide");
