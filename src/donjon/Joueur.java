@@ -1,6 +1,5 @@
 package donjon;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Joueur extends Personnage {
@@ -11,6 +10,15 @@ public class Joueur extends Personnage {
 		super(vie, force, piece);
 		this.i = 1;
 		this.j = 1;
+	}
+
+	public int getI() {
+		return i;
+	}
+	
+
+	public int getJ() {
+		return j;
 	}
 
 	@Override
@@ -27,6 +35,7 @@ public class Joueur extends Personnage {
 			System.out.println("La vie du monstre est maintenant de " + monstre.getVie());
 		}
 	}
+	
 	public String deplacer(String donjon[][]) {
 		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
