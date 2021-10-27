@@ -7,8 +7,8 @@ public class GestionDonjon {
 	Scanner in = new Scanner(System.in);
 	private String[][] donjon;
 	Personnage joueur = new Joueur(10, 5, 0);
-    ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
-    ArrayList<String> ObjetsList = new ArrayList<String>();
+    ArrayList<Personnage> monstersList = new ArrayList<Personnage>();
+    ArrayList<String> objetsList = new ArrayList<String>();
     String contenuSalle = " ";
     int indexMonstre = 0;
 	
@@ -221,8 +221,8 @@ public class GestionDonjon {
     }	
     
     public void deplacer() {
-    	if(MonstersList.isEmpty()) {
-    		ObjetsList.clear();
+    	if(monstersList.isEmpty()) {
+    		objetsList.clear();
     		contenuSalle = ((Joueur)joueur).deplacer(donjon);
     		monstersAndObjectsGeneration(contenuSalle);
     		}
@@ -238,16 +238,16 @@ public class GestionDonjon {
     		System.out.println("Pas de monstre dans la salle !");
     	}
     	else {
-        	System.out.println(MonstersList);
+        	System.out.println(monstersList);
         	System.out.println("Quel monstre attaquer ?");
         	indexMonstre = in.nextInt();
-        	((Joueur)joueur).attaquer(MonstersList.get(indexMonstre));
+        	((Joueur)joueur).attaquer(monstersList.get(indexMonstre));
     	}
-    	if(MonstersList.get(indexMonstre).getVie() <= 0) {
-    		MonstersList.remove(indexMonstre);
+    	if(monstersList.get(indexMonstre).getVie() <= 0) {
+    		monstersList.remove(indexMonstre);
     	}
     	else {
-    		MonstersList.get(indexMonstre).attaquer(joueur);
+    		monstersList.get(indexMonstre).attaquer(joueur);
     		if(joueur.getVie() <= 0) {
     			System.out.println("Vous êtes mort. GAME OVER.");
     		}
@@ -255,7 +255,7 @@ public class GestionDonjon {
     			System.out.println("Il vous reste " + joueur.getVie() + " point de vie.");
     		}
     	}
-    	if(MonstersList.isEmpty()) {
+    	if(monstersList.isEmpty()) {
     		System.out.println("Vous avez tuez tous les monstres ! Vous pouvez desormais accéder à la salle suivante !");
     	}
     	menuJoueur();
