@@ -208,6 +208,8 @@ public class GestionDonjon {
 	        	break;
 	        case "B":
 //        		if(monstersHP <= 0) { // total des HP de tout les monstres
+	        		ObjetsList.clear();
+	        		MonstersList.clear();
 	        		String roomType = ((Joueur)joueur).deplacer(donjon);
 		    		monstersAndObjectsGeneration(roomType);
 		            affichageCarte(donjon);
