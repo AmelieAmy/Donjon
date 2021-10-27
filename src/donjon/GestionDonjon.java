@@ -7,8 +7,8 @@ public class GestionDonjon {
 
 	public String[][] donjon;
 	Personnage joueur = new Joueur(10, 5, 0);
-    ArrayList<Personnage> MonstersList = new ArrayList<Personnage>();
-    ArrayList<String> ObjetsList = new ArrayList<String>();
+    ArrayList<Personnage> monstersList = new ArrayList<Personnage>();
+    ArrayList<String> objetsList = new ArrayList<String>();
 	
 	public GestionDonjon() {
 		Scanner in = new Scanner(System.in);
@@ -203,13 +203,13 @@ public class GestionDonjon {
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	// afficher le nombre d'objet, le type et le nombre de monstre
-	        	System.out.println("methode regarder"); 
+//	        	donjon[((Joueur)joueur).getI()][((Joueur)joueur).getJ()]
+	        	regarder(((Joueur)joueur).deplacer(donjon));
 	        	menuJoueur();
 	        	break;
 	        case "B":
 //        		if(monstersHP <= 0) { // total des HP de tout les monstres
-	        		ObjetsList.clear();
-	        		MonstersList.clear();
+	        		objetsList.clear();
 	        		String roomType = ((Joueur)joueur).deplacer(donjon);
 		    		monstersAndObjectsGeneration(roomType);
 		            affichageCarte(donjon);
@@ -228,22 +228,45 @@ public class GestionDonjon {
         }
     }	
 
+    public void regarder(String roomType) {
+    	if(roomType.contentEquals("O")) {
+    		System.out.println("Vous regardez autour de vous...");
+    		System.out.println("A vos pieds se trouve une " + objetsList.get(0) + ".");
+    		if(objetsList.size() > 0) {
+        		System.out.println("Un peu plus loin vous trouvez aussi une " + objetsList.get(1) + ".");
+    		}
+    		if(objetsList.size() > 1) {
+        		System.out.println("Décidément la chance vous souris, sur le chemin vous trébuchez sur une " + objetsList.get(2) + ".");
+    		}
+    	} else if(roomType.contentEquals("M")) {
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres.");
+    		System.out.println("Etrangement vous voyez les caractéristiques planer au dessus de leurs têtes.");
+    		System.out.println("Voici le premier monstre " + monstersList.get(0) + ".");
+    		if(monstersList.size() > 0) {
+        		System.out.println("Voici le deuxième monstre " + monstersList.get(1) + ".");
+    		}
+    		if(monstersList.size() > 1) {
+        		System.out.println("Voici le troisième monstre " + monstersList.get(2) + ".");
+    		}
+    	}
+    }
+    
     public void monstersAndObjectsGeneration(String roomType) {
 
     	if(roomType.contentEquals("O")) {
         	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre d'item de 1 ï¿½ 3.
-            	ObjetsList.add(randomisedObjects()); // genere le type d'item
+            	objetsList.add(randomisedObjects()); // genere le type d'item
     		}
     	}
     	
     	if(roomType.equals("M")) {
         	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre de monstre de 1 ï¿½ 3.
-        		MonstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
+        		monstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
     		}
     	}
     	
-    	System.out.println(ObjetsList);
-    	System.out.println(MonstersList);
+    	System.out.println(objetsList);
+    	System.out.println(monstersList);
     }
 
 	public String randomisedObjects() {
