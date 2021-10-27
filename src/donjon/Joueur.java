@@ -72,5 +72,18 @@ public class Joueur extends Personnage {
 		}
 		return nextSalle;
 	}
+	
+	public void useObject(String donjon[][],int lignes, int colonnes) {
+		for(int i=0;i<lignes-1;i++) {
+			for(int j=0;j<colonnes-1;j++) {
+				if(donjon[i][j] == "P") {
+					break;
+				}
+			}
+			if(donjon[i][j] == "P") {
+				break;
+			}
+		}
+	}
 
 }
