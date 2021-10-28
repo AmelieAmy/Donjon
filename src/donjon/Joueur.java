@@ -7,10 +7,18 @@ public class Joueur extends Personnage {
 	private int i;
 	private int j;
 
-	public Joueur(int vie, int force, int piece) {
+	public Joueur(int vie, int force, int piece, int i, int j) {
 		super(vie, force, piece);
-		this.i = 1;
-		this.j = 1;
+		this.i = i;
+		this.j = j;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public void setJ(int j) {
+		this.j = j;
 	}
 
 	public int getI() {
@@ -133,13 +141,13 @@ public class Joueur extends Personnage {
 					if(objetsList.get(objet).equals("Bourse d'or")) {
 						int rand=randInt(10,50);
 						setPiece(getPiece() + rand);
-						System.out.println("Vous récuperez "+rand+ " pieces.\nVous en avez au total "+getPiece());
+						System.out.println("Vous rï¿½cuperez "+rand+ " pieces.\nVous en avez au total "+getPiece());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de vie")) {
 						int rand=randInt(2,5);
 						setVie(getVie() + rand);
-						System.out.println("Vous récuperez "+rand+ " de vie.\nVous en avez au total "+getVie());
+						System.out.println("Vous rï¿½cuperez "+rand+ " de vie.\nVous en avez au total "+getVie());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de force")) {

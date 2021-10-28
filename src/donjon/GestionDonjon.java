@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class GestionDonjon {
 	Scanner in = new Scanner(System.in);
 	private String[][] donjon;
-	Personnage joueur = new Joueur(10, 5, 0);
+	Personnage joueur = new Joueur(10, 5, 0, 1,1);
     ArrayList<Personnage> monstersList = new ArrayList<Personnage>();
     ArrayList<String> objetsList = new ArrayList<String>();
     String contenuSalle = " ";
@@ -71,7 +71,6 @@ public class GestionDonjon {
 	public void diagonal(int lignes, int colonnes, int i, int j,int direction1, int direction2) {
 		
 		boolean stop = false;
-		donjon[1][1] = "P";
 		
 		while (!stop) {
 			if (i == lignes - 1 || j == colonnes - 1) {
