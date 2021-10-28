@@ -1,6 +1,7 @@
 package donjon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GestionDonjon {
@@ -10,8 +11,12 @@ public class GestionDonjon {
     ArrayList<Personnage> monstersList = new ArrayList<Personnage>();
     ArrayList<String> objetsList = new ArrayList<String>();
     String contenuSalle = " ";
-    int indexMonstre = 0;
-	boolean banditMancho = false;
+    private int indexMonstre = 0;
+	private boolean banditMancho = false;
+	private HashMap<String, Integer> monstersPositionI = new HashMap<String, Integer>();
+	private HashMap<String, Integer> monstersPositionJ = new HashMap<String, Integer>();
+	int lignes = 33;
+	int colonnes = 31;
 	
 	public GestionDonjon() {
 
@@ -25,11 +30,13 @@ public class GestionDonjon {
 		menuJoueur();
 	}
 
-	public String objectMonsterOrVoidGeneration(int i, int j) {
+	public String objectMonsterOrVoidGeneration() {
 		String oMV = "0";
 		int randomCase = randInt(0, 100);
-		if(randomCase < 10) {
-			oMV = "M";
+		if(randomCase < 5) {
+			oMV = "F";
+		} else if ((randomCase > 5) && (randomCase < 10)) {
+			oMV = "~";
 		} else if ((randomCase > 10) && (randomCase < 15)) {
 			oMV = "O";
 		} else if ((randomCase > 16) && (randomCase < 18) && !banditMancho) {
@@ -41,6 +48,89 @@ public class GestionDonjon {
 			banditMancho = true;
 		}
 		return oMV;
+	}
+	
+	public void getMonstersPosition(int lignes, int colonnes) {
+		int count = 0;
+		for (int i = 1; i < lignes; i++) {
+			for (int j = 1; j < colonnes; j++) {
+				if(donjon[i][j].equals("F")) {
+					monstersPositionI.put("F"+count, i);
+					monstersPositionJ.put("F"+count, j);
+					count++;
+				}
+				if(donjon[i][j].equals("~")) {
+					monstersPositionI.put("~"+count, i);
+					monstersPositionJ.put("~"+count, j);
+					count++;
+				}
+			}
+		}
+	}
+	
+//	public void clearMonstersPosition(int lignes, int colonnes) {
+//		for (int i = 0; i < monstersPositionI.size(); i++) {
+//			if(monstersPositionI.get("~"+i) != null) {
+//				donjon[monstersPositionI.get("~"+i)][monstersPositionJ.get("~"+i)] = " ";
+//			}
+//		}
+//	}
+
+	public void deplacementFrankenstein(int lignes, int colonnes) {
+		int i = 0;
+		int j = 0;
+		boolean movingFrank = false;
+		for (int k = 0; k < monstersPositionI.size(); k++) {
+			if(monstersPositionI.get("F"+k) != null) {
+				i = monstersPositionI.get("F"+k);
+				j = monstersPositionJ.get("F"+k);
+				movingFrank = false;
+				boolean notmovingFrank1 = false;
+				boolean notmovingFrank2 = false;
+				boolean notmovingFrank3 = false;
+				boolean notmovingFrank4 = false;
+				while (!movingFrank) {
+					switch(randInt(1, 4)) {
+						case 1:
+							if(donjon[i-1][j].equals(" ")) {
+								donjon[i-1][j] = "F";
+								donjon[i][j] = " ";
+								movingFrank=true;
+							}
+							notmovingFrank1 = true;
+							break;
+						case 2:
+							if(donjon[i][j+1].equals(" ")) {
+								donjon[i][j+1] = "F";
+								donjon[i][j] = " ";
+								movingFrank=true;
+							}
+							notmovingFrank2 = true;
+							break;
+						case 3:
+							if(donjon[i+1][j].equals(" ")) {
+								donjon[i+1][j] = "F";
+								donjon[i][j] = " ";
+								movingFrank=true;
+							}
+							notmovingFrank3 = true;
+							break;
+						case 4:
+							if(donjon[i][j-1].equals(" ")) {
+								donjon[i][j-1] = "F";
+								donjon[i][j] = " ";
+								movingFrank=true;
+							}
+							notmovingFrank4 = true;
+							break;
+					}
+					if(notmovingFrank1 && notmovingFrank2 && notmovingFrank3 && notmovingFrank4) {
+						donjon[i][j] = "F";
+						movingFrank=true;
+					}
+				}
+			}
+		}
 	}
 	
 	public void generationDonjon(int lignes, int colonnes) {
@@ -68,8 +158,7 @@ public class GestionDonjon {
 			switch (randInt(2, 3)) {
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i,j);
-					
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
 				}
 				if(j == colonnes-2) {
 					donjon[i][j + 1] = "S";
@@ -78,8 +167,7 @@ public class GestionDonjon {
 				break;
 			case 3:
 				if (donjon[i + 1][j].equals("#")) {
-					donjon[i + 1][j] = objectMonsterOrVoidGeneration(i, j);
-				
+					donjon[i + 1][j] = objectMonsterOrVoidGeneration();
 				}
 				if(i == lignes-2) {
 					donjon[i+1][j] = "S";
@@ -101,16 +189,14 @@ public class GestionDonjon {
 			case 1:
 				if (i != 1) {
 					if (donjon[i - 1][j].equals("#")) {
-						donjon[i - 1][j] = objectMonsterOrVoidGeneration(i, j);
-						
+						donjon[i - 1][j] = objectMonsterOrVoidGeneration();
 					}
 					i = i - 1;
 				} 
 				break;
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i, j);
-					
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
 				}
 				if(j == colonnes-2) {
 					donjon[i][j + 1] = "#";
@@ -119,7 +205,6 @@ public class GestionDonjon {
 			
 				break;
 			}
-
 		}
 		int nbVeines = randInt(1,lignes);
 		
@@ -127,7 +212,9 @@ public class GestionDonjon {
 			veines(lignes,colonnes,donjon);
 		}
 
-
+		// Récupération des positions des monstres
+		getMonstersPosition(lignes, colonnes);
+		
 		// affichage de la carte
 		affichageCarte(donjon);
 
@@ -204,10 +291,10 @@ public class GestionDonjon {
         System.out.println("Que voulez-vous faire ?");
 
         String choix = in.next();
-        choixJoueur(choix);
+        choixJoueur(choix, monstersList);
     }
 
-    public void choixJoueur(String choix) {
+    public void choixJoueur(String choix, ArrayList<Personnage> monstersList) {
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	((Joueur)joueur).regarder(contenuSalle, objetsList, monstersList);
@@ -215,7 +302,7 @@ public class GestionDonjon {
 		        menuJoueur();
 	        	break;
 	        case "B":
-	        	deplacer();
+	        	deplacementJoueur();
 	        	break;
 	        case "C":
 	        	combat();
@@ -240,7 +327,7 @@ public class GestionDonjon {
     			else {
     				System.out.println("Vous donnez " + prix + " pieces d'or au bandit , il vous reste " + joueur.getPiece() + " pieces d'or");
     				if(randInt(1,10) == 1) {
-    					System.out.println("Le bandit s'enfuit avec votre argent sans rien vous donner ! Quel idee de faire confiance Ã  un bandit...");
+    					System.out.println("Le bandit s'enfuit avec votre argent sans rien vous donner ! Quel idee de faire confiance a un bandit...");
     				}
     				else {
     					System.out.println("Le bandit vous donne " + objet + " que vous utilisez immediatement");
@@ -279,22 +366,24 @@ public class GestionDonjon {
     		contenuSalle = " ";
     	}
     }
-    
-    public void deplacer() {
+
+    public void deplacementJoueur() {
     	if(monstersList.isEmpty()) {
     		objetsList.clear();
-    		contenuSalle = ((Joueur)joueur).deplacer(donjon);
+    		contenuSalle = ((Joueur)joueur).deplacer(donjon, joueur);
     		monstersAndObjectsGeneration(contenuSalle);
-    		}
-    		else {
-    			System.out.println("Il reste des monstres dans la salle. Tuez les pour avancer.");
-    		}
-    		affichageCarte(donjon);
-	        menuJoueur();
+		}
+		else {
+			System.out.println("Il reste des monstres dans la salle. Tuez les pour avancer.");
+		}
+		getMonstersPosition(lignes, colonnes);
+		deplacementFrankenstein(lignes, colonnes);
+		affichageCarte(donjon);
+        menuJoueur();
     }
     
     public void combat() {
-    	if(!contenuSalle.equals("M")) {
+    	if((!contenuSalle.equals("F")) && (!contenuSalle.equals("~"))) {
     		System.out.println("Pas de monstre dans la salle !");
     	}
     	else {
@@ -327,19 +416,25 @@ public class GestionDonjon {
     	menuJoueur();
     }
 
-    public void monstersAndObjectsGeneration(String roomType) {
+    public void monstersAndObjectsGeneration(String contenuSalle) {
 
-    	if(roomType.equals("O")) {
-        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre d'item de 1 a 3.
+    	if(contenuSalle.equals("O")) {
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre d'item de 1 a 3.
             	objetsList.add(randomisedObjects()); // genere le type d'item
     		}
     	}
     	
-    	if(roomType.equals("M")) {
-        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre un nombre de monstre de 1 a 3.
-        		monstersList.add(new Monstre(randInt(3, 10), randInt(3, 5), randInt(20, 150)));
+    	if(contenuSalle.equals("F")) {
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre de Frankenstein de 1 a 3.
+        		monstersList.add(new Frankenstein(randInt(3, 10), randInt(3, 5), randInt(20, 150), 0, 0));
     		}
     	}
+    	if(contenuSalle.equals("~")) {
+        	for (int i = 0; i < randInt(1, 3); i++) { // genere un nombre de BlopInfernal de 1 a 3.
+        		monstersList.add(new BlopInfernal(randInt(3, 10), randInt(3, 5), randInt(20, 150), 0, 0));
+    		}
+    	}
+    	
     }
 
 	public String randomisedObjects() {

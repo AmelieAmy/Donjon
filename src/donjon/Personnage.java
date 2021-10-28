@@ -13,7 +13,6 @@ public abstract class Personnage {
 
 	public abstract void attaquer(Personnage perso);
 
-
 	public int getVie() {
 		return vie;
 	}

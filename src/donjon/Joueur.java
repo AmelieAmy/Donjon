@@ -17,7 +17,6 @@ public class Joueur extends Personnage {
 		return i;
 	}
 	
-
 	public int getJ() {
 		return j;
 	}
@@ -37,7 +36,7 @@ public class Joueur extends Personnage {
 		}
 	}
 	
-	public String deplacer(String donjon[][]) {
+	public String deplacer(String donjon[][], Personnage joueur) {
 		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
@@ -162,11 +161,6 @@ public class Joueur extends Personnage {
 	
 	}
 	
-	public static int randInt(int min, int max) {
-		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
-		return x;
-	}
-
     public void regarder(String contenuSalle, ArrayList objetsList, ArrayList monstersList) {
     	if(contenuSalle.equals("O")) {
             System.out.println(" ");
@@ -181,9 +175,18 @@ public class Joueur extends Personnage {
         		System.out.println("Decidement la chance vous souris, sur le chemin vous trebuchez sur une " + objetsList.get(2) + ".");
                 System.out.println(" ");
     		}
-    	} else if(contenuSalle.equals("M")) {
+    	} else if(contenuSalle.equals("F")) {
             System.out.println(" ");
-    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres.");
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres de type Frankenstein !!");
+    		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes :");
+            System.out.println(" ");
+        	for(int i = 0; i < monstersList.size(); i++) {
+        		System.out.println("Monstre " + i + " " + monstersList.get(i));
+                System.out.println(" ");
+        	}
+    	} else if(contenuSalle.equals("~")) {
+            System.out.println(" ");
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres de type Blop Infernal !!");
     		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes :");
             System.out.println(" ");
         	for(int i = 0; i < monstersList.size(); i++) {
@@ -196,5 +199,10 @@ public class Joueur extends Personnage {
             System.out.println(" ");
     	}
     }
-    
+
+	public static int randInt(int min, int max) {
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+		return x;
+	}
+
 }
