@@ -14,14 +14,7 @@ public class GestionDonjon {
 	boolean banditMancho = false;
 	
 	public GestionDonjon() {
-
-		System.out.print("Saisir le nombre de lignes du donjon : ");
-		int lignes = in.nextInt();
-
-		System.out.print("Saisir le nombre de colonnes du donjon: ");
-		int colonnes = in.nextInt();
-
-		generationDonjon(lignes, colonnes);
+		generationDonjon(50, 50);
 		menuJoueur();
 	}
 
@@ -42,22 +35,42 @@ public class GestionDonjon {
 		}
 		return oMV;
 	}
+	public void chemin(String donjon[][], int lignes, int colonnes, int i, int j, int direction ) {
 	
-	public void generationDonjon(int lignes, int colonnes) {
-
-		// declaration de la matrice
-		donjon = new String[lignes][colonnes];
-		
-		for (int i = 0; i < lignes; i++) {
-			for (int j = 0; j < colonnes; j++) {
-				donjon[i][j] = "#";
-			}
-		}
-		
-		int i = 1;
-		int j = 1;
 		boolean stop = false;
+		while (!stop) {
+			if (i == lignes - 1 || j == colonnes - 1) {
+				stop = true;
+				break;
+			}
+			switch (direction) {
+			case 2:
+				if (donjon[i][j + 1].equals("#")) {
+					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i,j);
+					
+				}
+				if(j == colonnes-2) {
+					donjon[i][j + 1] = "#";
+				}
+				j++;
+				break;
+			case 3:
+				if (donjon[i + 1][j].equals("#")) {
+					donjon[i + 1][j] = objectMonsterOrVoidGeneration(i, j);
+				
+				}
+				if(i == lignes-2) {
+					donjon[i+1][j] = "#";
+				}
+				i++;
+			}
+
+		}
+	}
+	
+	public void diagonal(int lignes, int colonnes, int i, int j,int direction1, int direction2) {
 		
+		boolean stop = false;
 		donjon[1][1] = "P";
 		
 		while (!stop) {
@@ -65,14 +78,26 @@ public class GestionDonjon {
 				stop = true;
 				break;
 			}
-			switch (randInt(2, 3)) {
+			switch (randInt(direction1,direction2)) {
+			case 1:
+				if (i != 1) {
+					if (donjon[i - 1][j].equals("#")) {
+						donjon[i - 1][j] = objectMonsterOrVoidGeneration(i, j);
+						
+					}
+					i = i - 1;
+				} 
+				break;
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
 					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i,j);
 					
 				}
-				if(j == colonnes-2) {
+				if(j == colonnes-2 && i > ((75*lignes)/100)) {
 					donjon[i][j + 1] = "S";
+				}
+				else if (j == colonnes-2) {
+					donjon[i][j + 1] = "#";
 				}
 				j++;
 				break;
@@ -86,47 +111,36 @@ public class GestionDonjon {
 				}
 				i++;
 			}
-
-		}
-		i = lignes - 2;
-		j = 1;
-		stop = false;
-
-		while (!stop) {
-			if (i == lignes - 1 || j == colonnes - 1) {
-				stop = true;
-				break;
-			}
-			switch (randInt(1, 2)) {
-			case 1:
-				if (i != 1) {
-					if (donjon[i - 1][j].equals("#")) {
-						donjon[i - 1][j] = objectMonsterOrVoidGeneration(i, j);
-						
-					}
-					i = i - 1;
-				} 
-				break;
-			case 2:
-				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration(i, j);
+			if(direction2 == 3) {
+				if(i%5 == 0) {
+					chemin(donjon, lignes, colonnes, i, j, 2);
 					
 				}
-				if(j == colonnes-2) {
-					donjon[i][j + 1] = "#";
+				if(j%5 == 0) {
+					chemin(donjon, lignes, colonnes, i, j, 3);
 				}
-				j++;
-			
-				break;
 			}
 
 		}
-		int nbVeines = randInt(1,lignes);
-		
-		for(int y = 0; y < nbVeines; y++) {
-			veines(lignes,colonnes,donjon);
-		}
+	}
+	
+	public void generationDonjon(int lignes, int colonnes) {
 
+		// declaration de la matrice
+		donjon = new String[lignes][colonnes];
+		
+		for (int i = 0; i < lignes; i++) {
+			for (int j = 0; j < colonnes; j++) {
+				donjon[i][j] = "#";
+			}
+		}
+		donjon[1][1] = "P";
+		diagonal(lignes, colonnes, 1, 1, 2, 3);
+		diagonal(lignes, colonnes, lignes-2, 1,1,2);
+		diagonal(lignes, colonnes, lignes-2, colonnes/2, 1,2);
+		diagonal(lignes, colonnes, lignes-2, colonnes/4,1,2);
+		diagonal(lignes, colonnes, lignes/2, 1,1,2);
+		diagonal(lignes, colonnes, (75*lignes)/100, 1,1,2);
 
 		// affichage de la carte
 		affichageCarte(donjon);
