@@ -13,26 +13,26 @@ public class GestionDonjon {
     String contenuSalle = " ";
     private int indexMonstre = 0;
 	private boolean banditMancho = false;
-	private HashMap<String, Integer> monstersPositionI = new HashMap<String, Integer>();
-	private HashMap<String, Integer> monstersPositionJ = new HashMap<String, Integer>();
-	int lignes = 33;
-	int colonnes = 31;
+//	private HashMap<String, Integer> monstersPositionI = new HashMap<String, Integer>();
+//	private HashMap<String, Integer> monstersPositionJ = new HashMap<String, Integer>();
+	private ArrayList<Integer> FrankPositionI = new ArrayList<Integer>();
+	private ArrayList<Integer> FrankPositionJ = new ArrayList<Integer>();
 	
 	public GestionDonjon() {
-		generationDonjon(50, 50);
+		generationDonjon(30,30);
 		menuJoueur();
 	}
 
 	public String objectMonsterOrVoidGeneration() {
 		String oMV = "0";
 		int randomCase = randInt(0, 100);
-		if(randomCase < 5) {
+		if(randomCase < 3) {
 			oMV = "F";
-		} else if ((randomCase > 5) && (randomCase < 10)) {
+		} else if ((randomCase > 3) && (randomCase < 6)) {
 			oMV = "~";
-		} else if ((randomCase > 10) && (randomCase < 15)) {
+		} else if ((randomCase > 6) && (randomCase < 9)) {
 			oMV = "O";
-		} else if ((randomCase > 16) && (randomCase < 18) && !banditMancho) {
+		} else if ((randomCase > 9) && (randomCase < 11) && !banditMancho) {
 			oMV = "$";
 		} else {
 			oMV = " ";
@@ -42,21 +42,31 @@ public class GestionDonjon {
 		}
 		return oMV;
 	}
-	public void chemin(String donjon[][], int lignes, int colonnes, int i, int j, int direction ) {
+	
+//	public void getMonstersPosition(int lignes, int colonnes) {
+//		int count = 0;
+//		for (int i = 1; i < lignes; i++) {
+//			for (int j = 1; j < colonnes; j++) {
+//				if(donjon[i][j].equals("F")) {
+//					monstersPositionI.put("F"+count, i);
+//					monstersPositionJ.put("F"+count, j);
+//					count++;
+//				}
+//				if(donjon[i][j].equals("~")) {
+//					monstersPositionI.put("~"+count, i);
+//					monstersPositionJ.put("~"+count, j);
+//					count++;
+//				}
+//			}
+//		}
+//	}
 	
 	public void getMonstersPosition(int lignes, int colonnes) {
-		int count = 0;
 		for (int i = 1; i < lignes; i++) {
 			for (int j = 1; j < colonnes; j++) {
 				if(donjon[i][j].equals("F")) {
-					monstersPositionI.put("F"+count, i);
-					monstersPositionJ.put("F"+count, j);
-					count++;
-				}
-				if(donjon[i][j].equals("~")) {
-					monstersPositionI.put("~"+count, i);
-					monstersPositionJ.put("~"+count, j);
-					count++;
+					FrankPositionI.add(i);
+					FrankPositionJ.add(j);
 				}
 			}
 		}
@@ -70,77 +80,98 @@ public class GestionDonjon {
 //		}
 //	}
 
+//	public void removeDoublePositions() {
+//		for (int k = 0; k < monstersPositionI.size(); k++) {
+//			if(monstersPositionI.get("F"+k) != null) {
+//				if((monstersPositionI.get("F"+k) && monstersPositionJ.get("F"+k)) == (monstersPositionI.get("F"+k) && monstersPositionJ.get("F"+k)))
+//				i = monstersPositionI.get("F"+k);
+//				j = monstersPositionJ.get("F"+k);
+//			}
+//		}
+//	}
+	
 	public void deplacementFrankenstein(int lignes, int colonnes) {
 		int i = 0;
 		int j = 0;
 		boolean movingFrank = false;
-		for (int k = 0; k < monstersPositionI.size(); k++) {
-			if(monstersPositionI.get("F"+k) != null) {
-				i = monstersPositionI.get("F"+k);
-				j = monstersPositionJ.get("F"+k);
-				movingFrank = false;
-				boolean notmovingFrank1 = false;
-				boolean notmovingFrank2 = false;
-				boolean notmovingFrank3 = false;
-				boolean notmovingFrank4 = false;
-				while (!movingFrank) {
-					switch(randInt(1, 4)) {
-						case 1:
-							if(donjon[i-1][j].equals(" ")) {
-								donjon[i-1][j] = "F";
-								donjon[i][j] = " ";
-								movingFrank=true;
-							}
+//		for (int k = 0; k < monstersPositionI.size(); k++) {
+//			if(monstersPositionI.get("F"+k) != null) {
+//				i = monstersPositionI.get("F"+k);
+//				j = monstersPositionJ.get("F"+k);
+		for (int k = 0; k < FrankPositionI.size(); k++) {
+			i = FrankPositionI.get(k);
+			j = FrankPositionJ.get(k);
+			movingFrank = false;
+			boolean notmovingFrank1 = false;
+			boolean notmovingFrank2 = false;
+			boolean notmovingFrank3 = false;
+			boolean notmovingFrank4 = false;
+			while (!movingFrank) {
+				switch(randInt(1, 4)) {
+					case 1:
+						if(donjon[i-1][j].equals(" ")) {
+							donjon[i-1][j] = "F";
+							donjon[i][j] = " ";
+							movingFrank=true;
+//								System.out.println("top i: " + i + ", j : " + j);
+							break;
+						} else {
 							notmovingFrank1 = true;
+//								System.out.println("top not movingFrank");
+						}
+						break;
+					case 2:
+						if(donjon[i][j+1].equals(" ")) {
+							donjon[i][j+1] = "F";
+							donjon[i][j] = " ";
+							movingFrank=true;
+//								System.out.println("right i: " + i + ", j : " + j);
 							break;
-						case 2:
-							if(donjon[i][j+1].equals(" ")) {
-								donjon[i][j+1] = "F";
-								donjon[i][j] = " ";
-								movingFrank=true;
-							}
+						} else {
 							notmovingFrank2 = true;
+//								System.out.println("right not movingFrank");
+						}
+						break;
+					case 3:
+						if(donjon[i+1][j].equals(" ")) {
+							donjon[i+1][j] = "F";
+							donjon[i][j] = " ";
+							movingFrank=true;
+//								System.out.println("bootom i: " + i + ", j : " + j);
 							break;
-						case 3:
-							if(donjon[i+1][j].equals(" ")) {
-								donjon[i+1][j] = "F";
-								donjon[i][j] = " ";
-								movingFrank=true;
-							}
+						} else {
 							notmovingFrank3 = true;
+//								System.out.println("bootom not movingFrank");
+						}
+						break;
+					case 4:
+						if(donjon[i][j-1].equals(" ")) {
+							donjon[i][j-1] = "F";
+							donjon[i][j] = " ";
+							movingFrank=true;
+//								System.out.println("left i: " + i + ", j : " + j);
 							break;
-						case 4:
-							if(donjon[i][j-1].equals(" ")) {
-								donjon[i][j-1] = "F";
-								donjon[i][j] = " ";
-								movingFrank=true;
-							}
+						} else {
 							notmovingFrank4 = true;
-							break;
-					}
-					if(notmovingFrank1 && notmovingFrank2 && notmovingFrank3 && notmovingFrank4) {
-						donjon[i][j] = "F";
-						movingFrank=true;
-					}
+//								System.out.println("left not movingFrank");
+						}
+						break;
+				}
+				if(notmovingFrank1 && notmovingFrank2 && notmovingFrank3 && notmovingFrank4) {
+					donjon[i][j] = "F";
+//						System.out.println("aucun i: " + i + ", j : " + j);
+					movingFrank=true;
 				}
 			}
 		}
 	}
 	
-	public void generationDonjon(int lignes, int colonnes) {
-
-		// declaration de la matrice
-		donjon = new String[lignes][colonnes];
+	public void chemin(String donjon[][], int lignes, int colonnes, int i, int j, int direction ) {
 		
-		for (int i = 0; i < lignes; i++) {
-			for (int j = 0; j < colonnes; j++) {
-				donjon[i][j] = "#";
-			}
-		}
-		
-		int i = 1;
-		int j = 1;
 		boolean stop = false;
+		
+		donjon[1][1] = "P";
+		
 		while (!stop) {
 			if (i == lignes - 1 || j == colonnes - 1) {
 				stop = true;
@@ -150,6 +181,7 @@ public class GestionDonjon {
 			case 2:
 				if (donjon[i][j + 1].equals("#")) {
 					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
+
 				}
 				if(j == colonnes-2) {
 					donjon[i][j + 1] = "#";
@@ -165,7 +197,6 @@ public class GestionDonjon {
 				}
 				i++;
 			}
-
 		}
 	}
 	
@@ -179,35 +210,35 @@ public class GestionDonjon {
 				break;
 			}
 			switch (randInt(direction1,direction2)) {
-			case 1:
-				if (i != 1) {
-					if (donjon[i - 1][j].equals("#")) {
-						donjon[i - 1][j] = objectMonsterOrVoidGeneration();
+				case 1:
+					if (i != 1) {
+						if (donjon[i - 1][j].equals("#")) {
+							donjon[i - 1][j] = objectMonsterOrVoidGeneration();
+						}
+						i = i - 1;
+					} 
+					break;
+				case 2:
+					if (donjon[i][j + 1].equals("#")) {
+						donjon[i][j + 1] = objectMonsterOrVoidGeneration();
 					}
-					i = i - 1;
-				} 
-				break;
-			case 2:
-				if (donjon[i][j + 1].equals("#")) {
-					donjon[i][j + 1] = objectMonsterOrVoidGeneration();
-				}
-				if(j == colonnes-2 && i > ((75*lignes)/100)) {
-					donjon[i][j + 1] = "S";
-				}
-				else if (j == colonnes-2) {
-					donjon[i][j + 1] = "#";
-				}
-				j++;
-				break;
-			case 3:
-				if (donjon[i + 1][j].equals("#")) {
-					donjon[i + 1][j] = objectMonsterOrVoidGeneration(i, j);
-				
-				}
-				if(i == lignes-2) {
-					donjon[i+1][j] = "S";
-				}
-				i++;
+					if(j == colonnes-2 && i > ((75*lignes)/100)) {
+						donjon[i][j + 1] = "S";
+					}
+					else if (j == colonnes-2) {
+						donjon[i][j + 1] = "#";
+					}
+					j++;
+					break;
+				case 3:
+					if (donjon[i + 1][j].equals("#")) {
+						donjon[i + 1][j] = objectMonsterOrVoidGeneration();
+					
+					}
+					if(i == lignes-2) {
+						donjon[i+1][j] = "S";
+					}
+					i++;
 			}
 			if(direction2 == 3) {
 				if(i%5 == 0) {
@@ -239,9 +270,6 @@ public class GestionDonjon {
 		diagonal(lignes, colonnes, lignes-2, colonnes/4,1,2);
 		diagonal(lignes, colonnes, lignes/2, 1,1,2);
 		diagonal(lignes, colonnes, (75*lignes)/100, 1,1,2);
-
-		// R�cup�ration des positions des monstres
-		getMonstersPosition(lignes, colonnes);
 		
 		// affichage de la carte
 		affichageCarte(donjon);
@@ -340,6 +368,9 @@ public class GestionDonjon {
 	    		affichageCarte(donjon);
 	        	menuJoueur();
 	        	break;
+        	default :
+	        	menuJoueur();
+	        	break;
         }
     }
     
@@ -404,8 +435,17 @@ public class GestionDonjon {
 		else {
 			System.out.println("Il reste des monstres dans la salle. Tuez les pour avancer.");
 		}
-		getMonstersPosition(lignes, colonnes);
-		deplacementFrankenstein(lignes, colonnes);
+		// Recuperation des positions des monstres
+		getMonstersPosition(30,30);
+		for (int k = 0; k < FrankPositionI.size(); k++) {
+			System.out.println("key =  " + "F"+k);
+			System.out.println("i : " + FrankPositionI.get(k));
+			System.out.println("j : " + FrankPositionJ.get(k));
+		}
+		deplacementFrankenstein(30, 30);
+		System.out.println(" ");
+		System.out.println("-");
+		System.out.println(" ");
 		affichageCarte(donjon);
         menuJoueur();
     }
