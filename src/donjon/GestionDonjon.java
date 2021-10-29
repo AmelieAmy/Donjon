@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class GestionDonjon {
 	Scanner in = new Scanner(System.in);
 	private String[][] donjon;
-	Personnage joueur = new Joueur(10, 5, 0, 1,1);
+	Personnage joueur = new Joueur(10, 10, 0, 1,1);
     ArrayList<Personnage> monstersList = new ArrayList<Personnage>();
     ArrayList<String> objetsList = new ArrayList<String>();
     String contenuSalle = " ";
@@ -20,8 +20,8 @@ public class GestionDonjon {
 	private ArrayList<Integer> FrankPositionJ = new ArrayList<Integer>();
 	
 	public GestionDonjon() throws IOException {
-		generationDonjon(30,30);
 		((Joueur) joueur).donnerPseudo();
+		generationDonjon(30,30);
 		menuJoueur();
 	}
 
