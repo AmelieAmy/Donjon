@@ -1,7 +1,9 @@
 package donjon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class GestionDonjon {
 	Scanner in = new Scanner(System.in);
@@ -12,8 +14,12 @@ public class GestionDonjon {
     String contenuSalle = " ";
     int indexMonstre = 0;
 	boolean banditMancho = false;
+	String pseudo;
+
 	
-	public GestionDonjon() {
+	public GestionDonjon() throws IOException {
+		
+		((Joueur) joueur).donnerPseudo();
 
 		System.out.print("Saisir le nombre de lignes du donjon : ");
 		int lignes = in.nextInt();
@@ -191,7 +197,7 @@ public class GestionDonjon {
 		}
 	}
 	
-	public void menuJoueur() {
+	public void menuJoueur() throws IOException {
 		bandit();
         System.out.println("");
         System.out.println("-------------  MENU D'ACTIONS  -------------");
@@ -207,7 +213,7 @@ public class GestionDonjon {
         choixJoueur(choix);
     }
 
-    public void choixJoueur(String choix) {
+    public void choixJoueur(String choix) throws IOException {
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	((Joueur)joueur).regarder(contenuSalle, objetsList, monstersList);
@@ -280,7 +286,7 @@ public class GestionDonjon {
     	}
     }
     
-    public void deplacer() {
+    public void deplacer() throws IOException {
     	if(monstersList.isEmpty()) {
     		objetsList.clear();
     		contenuSalle = ((Joueur)joueur).deplacer(donjon);
@@ -293,7 +299,7 @@ public class GestionDonjon {
 	        menuJoueur();
     }
     
-    public void combat() {
+    public void combat() throws IOException {
     	if(!contenuSalle.equals("M")) {
     		System.out.println("Pas de monstre dans la salle !");
     	}

@@ -3,6 +3,13 @@ package donjon;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.itextpdf.text.DocumentException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class Joueur extends Personnage {
 	private int i;
 	private int j;
@@ -21,6 +28,9 @@ public class Joueur extends Personnage {
 	public int getJ() {
 		return j;
 	}
+	
+	String pseudo;
+	Score score = new Score();
 
 	@Override
 	public void attaquer(Personnage perso) {
@@ -37,7 +47,13 @@ public class Joueur extends Personnage {
 		}
 	}
 	
-	public String deplacer(String donjon[][]) {
+	public void donnerPseudo() {
+		Scanner in = new Scanner(System.in);
+		System.out.print("Entrez votre pseudo : ");
+		pseudo=in.next();
+	}
+	
+	public String deplacer(String donjon[][]) throws IOException {
 		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
@@ -55,6 +71,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i - 1][j].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					score.txt(pseudo, piece, LocalDate.now());
 					System.exit(0);
 				}
 				nextSalle = donjon[i - 1][j];
@@ -70,6 +87,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i][j + 1].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					score.txt(pseudo, piece, LocalDate.now());
 					System.exit(0);
 				}
 				nextSalle = donjon[i][j+1];
@@ -85,6 +103,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i + 1][j].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					score.txt(pseudo, piece, LocalDate.now());
 					System.exit(0);
 				}
 				nextSalle = donjon[i + 1][j];
@@ -100,6 +119,7 @@ public class Joueur extends Personnage {
 			else {
 				if(donjon[i][j-1].equals("S")) {
 					System.out.println("Gagne ! Vous avez termine le niveau avec " + vie + " points de vie et " + piece + " pieces d'or.");
+					score.txt(pseudo, piece, LocalDate.now());
 					System.exit(0);
 				}
 				nextSalle = donjon[i][j-1];
