@@ -14,17 +14,24 @@ public class Joueur extends Personnage {
 	private int i;
 	private int j;
 
-	public Joueur(int vie, int force, int piece) {
+	public Joueur(int vie, int force, int piece, int i, int j) {
 		super(vie, force, piece);
-		this.i = 1;
-		this.j = 1;
+		this.i = i;
+		this.j = j;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public void setJ(int j) {
+		this.j = j;
 	}
 
 	public int getI() {
 		return i;
 	}
 	
-
 	public int getJ() {
 		return j;
 	}
@@ -54,6 +61,7 @@ public class Joueur extends Personnage {
 	}
 	
 	public String deplacer(String donjon[][]) throws IOException {
+	public String deplacer(String donjon[][], Personnage joueur) {
 		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
@@ -153,13 +161,13 @@ public class Joueur extends Personnage {
 					if(objetsList.get(objet).equals("Bourse d'or")) {
 						int rand=randInt(10,50);
 						setPiece(getPiece() + rand);
-						System.out.println("Vous récuperez "+rand+ " pieces.\nVous en avez au total "+getPiece());
+						System.out.println("Vous rï¿½cuperez "+rand+ " pieces.\nVous en avez au total "+getPiece());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de vie")) {
 						int rand=randInt(2,5);
 						setVie(getVie() + rand);
-						System.out.println("Vous récuperez "+rand+ " de vie.\nVous en avez au total "+getVie());
+						System.out.println("Vous rï¿½cuperez "+rand+ " de vie.\nVous en avez au total "+getVie());
 						objetsList.remove(objet);
 						
 					}else if(objetsList.get(objet).equals("Potion de force")) {
@@ -182,11 +190,6 @@ public class Joueur extends Personnage {
 	
 	}
 	
-	public static int randInt(int min, int max) {
-		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
-		return x;
-	}
-
     public void regarder(String contenuSalle, ArrayList objetsList, ArrayList monstersList) {
     	if(contenuSalle.equals("O")) {
             System.out.println(" ");
@@ -201,9 +204,18 @@ public class Joueur extends Personnage {
         		System.out.println("Decidement la chance vous souris, sur le chemin vous trebuchez sur une " + objetsList.get(2) + ".");
                 System.out.println(" ");
     		}
-    	} else if(contenuSalle.equals("M")) {
+    	} else if(contenuSalle.equals("F")) {
             System.out.println(" ");
-    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres.");
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres de type Frankenstein !!");
+    		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes :");
+            System.out.println(" ");
+        	for(int i = 0; i < monstersList.size(); i++) {
+        		System.out.println("Monstre " + i + " " + monstersList.get(i));
+                System.out.println(" ");
+        	}
+    	} else if(contenuSalle.equals("~")) {
+            System.out.println(" ");
+    		System.out.println("Devant vous se dresse " + monstersList.size() + " monstres de type Blop Infernal !!");
     		System.out.println("Etrangement vous voyez les caracteristiques planer au dessus de leurs tetes :");
             System.out.println(" ");
         	for(int i = 0; i < monstersList.size(); i++) {
@@ -216,5 +228,10 @@ public class Joueur extends Personnage {
             System.out.println(" ");
     	}
     }
-    
+
+	public static int randInt(int min, int max) {
+		int x = (int) ((Math.random() * ((max - min) + 1)) + min);
+		return x;
+	}
+
 }
