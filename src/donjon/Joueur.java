@@ -60,8 +60,7 @@ public class Joueur extends Personnage {
 		pseudo=in.next();
 	}
 	
-	public String deplacer(String donjon[][]) throws IOException {
-	public String deplacer(String donjon[][], Personnage joueur) {
+	public String deplacer(String donjon[][], Personnage joueur)throws IOException {
 		
 		System.out.println("Dans quel direction souhaitez vous aller ?");
 		System.out.println("1 = haut");

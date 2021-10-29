@@ -19,7 +19,7 @@ public class GestionDonjon {
 	private ArrayList<Integer> FrankPositionI = new ArrayList<Integer>();
 	private ArrayList<Integer> FrankPositionJ = new ArrayList<Integer>();
 	
-	public GestionDonjon() {
+	public GestionDonjon() throws IOException {
 		generationDonjon(30,30);
 		((Joueur) joueur).donnerPseudo();
 		menuJoueur();
@@ -324,8 +324,7 @@ public class GestionDonjon {
         choixJoueur(choix, monstersList);
     }
 
-    public void choixJoueur(String choix) throws IOException {
-    public void choixJoueur(String choix, ArrayList<Personnage> monstersList) {
+    public void choixJoueur(String choix, ArrayList<Personnage> monstersList) throws IOException{
         switch(choix.toUpperCase()) {
 	        case "A":
 	        	((Joueur)joueur).regarder(contenuSalle, objetsList, monstersList);
@@ -401,7 +400,7 @@ public class GestionDonjon {
     	}
     }
 
-    public void deplacementJoueur() {
+    public void deplacementJoueur() throws IOException {
     	if(monstersList.isEmpty()) {
     		objetsList.clear();
     		contenuSalle = ((Joueur)joueur).deplacer(donjon, joueur);
