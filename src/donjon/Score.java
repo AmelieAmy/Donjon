@@ -73,6 +73,8 @@ public class Score {
 
 		newText.flush();
 		newText.close();
+		
+		hightScore();
 
 	}
 	

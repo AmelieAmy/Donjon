@@ -10,7 +10,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Scanner in =new Scanner(System.in);
-		
+		String choix = null;
+		do {
 	        System.out.println("");
 	        System.out.println("-------------  MENU PRINCIPAL  -------------");
 	        System.out.println("A - Afficher les 10 meilleurs scores");
@@ -20,7 +21,7 @@ public class Main {
 	        System.out.println("");
 	        System.out.println("Que voulez-vous faire ?");
 
-	        String choix = in.next();
+	        choix = in.next();
 	        switch(choix.toUpperCase()) {
 	        case "A":
 	        	Score score = new Score();
@@ -34,6 +35,7 @@ public class Main {
 	        	System.exit(0);
 	        	break;
 	        }
+		}while(choix.equalsIgnoreCase("A") || choix.equalsIgnoreCase("B"));
 		
 		
 		
