@@ -62,7 +62,7 @@ public class Joueur extends Personnage {
 	
 	public String deplacer(String donjon[][], Personnage joueur)throws IOException {
 		
-		System.out.println("Dans quel direction souhaitez vous aller ?");
+		System.out.println("Dans quelle direction souhaitez vous aller ?");
 		System.out.println("1 = haut");
 		System.out.println("2 = droite");
 		System.out.println("3 = bas");

@@ -2,7 +2,6 @@ package donjon;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -18,9 +17,11 @@ public class GestionDonjon {
 	private boolean banditMancho = false;
 	private ArrayList<Integer> FrankPositionI = new ArrayList<Integer>();
 	private ArrayList<Integer> FrankPositionJ = new ArrayList<Integer>();
+	private ArrayList<Integer> BlopPositionI = new ArrayList<Integer>();
+	private ArrayList<Integer> BlopPositionJ = new ArrayList<Integer>();
 	
 	public GestionDonjon() throws IOException {
-		((Joueur) joueur).donnerPseudo();
+//		((Joueur) joueur).donnerPseudo();
 		generationDonjon(30,30);
 		menuJoueur();
 	}
@@ -44,19 +45,25 @@ public class GestionDonjon {
 		}
 		return oMV;
 	}
-	
-	public void getFrankPosition(int lignes, int colonnes) {
+
+	public void getMonstersPosition(int lignes, int colonnes) {
 		for (int i = 1; i < lignes; i++) {
 			for (int j = 1; j < colonnes; j++) {
+				// get Frank positions
 				if(donjon[i][j].equals("F")) {
 					FrankPositionI.add(i);
 					FrankPositionJ.add(j);
+				// get blop positions
+				} else if(donjon[i][j].equals("~")) {
+					BlopPositionI.add(i);
+					BlopPositionJ.add(j);
 				}
 			}
 		}
 	}
 
-	public void setFrankPosition(int lignes, int colonnes) {
+	public void setMonstersPosition(int lignes, int colonnes) {
+		// set Frank positions
 		for (int k = 0; k < FrankPositionI.size(); k++) {
 			for (int i = 1; i < lignes; i++) {
 				for (int j = 1; j < colonnes; j++) {
@@ -68,14 +75,26 @@ public class GestionDonjon {
 				}
 			}
 		}
+		// set blop positions
+		for (int k = 0; k < BlopPositionI.size(); k++) {
+			for (int i = 1; i < lignes; i++) {
+				for (int j = 1; j < colonnes; j++) {
+					if(donjon[i][j].equals("~")) {
+						BlopPositionI.set(k,i);
+						BlopPositionJ.set(k,j);
+						k = k+1;
+					}
+				}
+			}
+		}
 	}
 	
-	public void deplacementFrank(int lignes, int colonnes) {
+	public void deplacementFrank() {
 		int i = 0;
 		int j = 0;
 		boolean movingFrank = false;
 		for (int k = 0; k < FrankPositionI.size(); k++) {
-			// rï¿½cupï¿½rer la position des Frank dans i et j
+			// recuperer la position des Frank dans i et j
 			i = FrankPositionI.get(k);
 			j = FrankPositionJ.get(k);
 			movingFrank = false;
@@ -86,42 +105,52 @@ public class GestionDonjon {
 			while (!movingFrank) {
 				switch(randInt(1, 4)) {
 					case 1:
-						// si la case au dessus de la position actuelle du Frank est vide
-						if(donjon[i-1][j].equals(" ")) {
+						// Si la position i du joueur est = a la position i du monstre
+						// ET la position j du joueur est = a la position j du monstre
+						if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+							donjon[i][j] = "P";
+						// sinon si la case au dessus de la position actuelle de Frank est vide
+						} else if(donjon[i-1][j].equals(" ") || donjon[i-1][j].equals("P")) {
 							// remplir la case au dessus avec un F
 							donjon[i-1][j] = "F";
 							// remplir la case actuelle avec du vide
 							donjon[i][j] = " ";
-							// si il a pas bu bouger passer le boolean ï¿½ true pour sortir du while
-							movingFrank=true;
+							// si il a pas bu bouger passer le boolean a true pour sortir du while
+							movingFrank = true;
 						} else {
-							 // si il n'a pas bu bouger dans cette direction passer le boolean ï¿½ true
+							 // si il n'a pas bu bouger dans cette direction passer le boolean a true
 							notmovingFrank1 = true;
 						}
 						break;
 					case 2:
-						if(donjon[i][j+1].equals(" ")) {
+						if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+							donjon[i][j] = "P";
+						} else if(donjon[i][j+1].equals(" ") || donjon[i][j+1].equals("P")) {
 							donjon[i][j+1] = "F";
 							donjon[i][j] = " ";
-							movingFrank=true;
+							movingFrank = true;
 						} else {
 							notmovingFrank2 = true;
 						}
 						break;
 					case 3:
-						if(donjon[i+1][j].equals(" ")) {
+						if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+							donjon[i][j] = "P";
+						} else if(donjon[i+1][j].equals(" ") || donjon[i+1][j].equals("P")) {
 							donjon[i+1][j] = "F";
 							donjon[i][j] = " ";
-							movingFrank=true;
+							movingFrank = true;
 						} else {
 							notmovingFrank3 = true;
 						}
 						break;
 					case 4:
-						if(donjon[i][j-1].equals(" ")) {
+						if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+							donjon[i][j] = "P";
+						} else if(donjon[i][j-1].equals(" ") || donjon[i][j-1].equals("P")) {
 							donjon[i][j-1] = "F";
 							donjon[i][j] = " ";
-							movingFrank=true;
+							movingFrank = true;
 						} else {
 							notmovingFrank4 = true;
 						}
@@ -129,10 +158,216 @@ public class GestionDonjon {
 				}
 				// si il n'y a aucune case vide dans les 4 directions
 				if(notmovingFrank1 && notmovingFrank2 && notmovingFrank3 && notmovingFrank4) {
-					// rester ï¿½ la meme place et sortir du while
+					// rester a la meme place et sortir du while
 					donjon[i][j] = "F";
-					movingFrank=true;
+					movingFrank = true;
 				}
+			}
+		}
+	}
+
+	public void deplacementBlop() {
+		int i = 0;
+		int j = 0;
+		boolean movingBlop = false;
+		for (int k = 0; k < BlopPositionI.size(); k++) {
+			// recuperer la position des Blop dans i et j
+			i = BlopPositionI.get(k);
+			j = BlopPositionJ.get(k);
+			movingBlop = false;
+			boolean notmovingBlop1 = false;
+			boolean notmovingBlop2 = false;
+			boolean notmovingBlop3 = false;
+			boolean notmovingBlop4 = false;
+			switch(randInt(1, 2)) {
+				// les Blop bougent vers le joueur
+				case 1:
+					// Si la position i du joueur est < a la position i du monstre
+					if((((Joueur)joueur).getI() <= i && ((Joueur)joueur).getJ() != j)
+					|| (((Joueur)joueur).getI() < i && ((Joueur)joueur).getJ() == j)){
+						// va vers le haut, si il y a du vide
+						if(donjon[i-1][j].equals(" ")) {
+							donjon[i-1][j] = "~";
+							donjon[i][j] = " ";
+							break;
+						// sinon 
+						} else {
+							notmovingBlop1 = true;
+							// si la position j du joueur est inferieur a celle du blop
+							if((((Joueur)joueur).getJ() <= j && ((Joueur)joueur).getI() != i)
+							|| (((Joueur)joueur).getJ() < j && ((Joueur)joueur).getI() == i)){
+								// si la case a gauche est vide, va a gauche
+								if(donjon[i][j-1].equals(" ")){
+									donjon[i][j-1] = "~";
+									donjon[i][j] = " ";
+									break;
+								// sinon si la case a droite est vide, va a droite
+								} else if(donjon[i][j+1].equals(" ")){
+									donjon[i][j+1] = "~";
+									donjon[i][j] = " ";
+									break;
+								} else {
+									notmovingBlop2 = true;
+								}
+							// sinon la position j du joueur est superieur a celle du blop
+							} else {
+								// si la case a droite est vide, va a droite
+								if(donjon[i][j+1].equals(" ")){
+									donjon[i][j+1] = "~";
+									donjon[i][j] = " ";
+									break;
+								// sinon si la case a gauche est vide, va a gauche
+								} else if(donjon[i][j-1].equals(" ")){
+									donjon[i][j-1] = "~";
+									donjon[i][j] = " ";
+									break;
+								} else {
+									notmovingBlop3 = true;
+								}
+							}
+							// Si le blop n'a pas trouvé de case vide en haut, a gauche, a droite et qu'il
+							// y en a une en bas, va en bas
+							if(notmovingBlop1 && notmovingBlop2 && notmovingBlop3 && donjon[i+1][j].equals(" ")) {
+								donjon[i+1][j] = "~";
+								donjon[i][j] = " ";
+								break;
+							} else {
+								notmovingBlop4 = true;
+							}
+						}
+						// si il n'y a aucune case vide dans les 4 directions
+						if(notmovingBlop1 && notmovingBlop2 && notmovingBlop3 && notmovingBlop4) {
+							// reste a la meme place et sort du switch
+							donjon[i][j] = "~";
+							break;
+						}
+					// Sinon si la position i du joueur est = a la position i du monstre
+					// ET la position j du joueur est = a la position j du monstre
+					} else if ( (((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+						BlopPositionI.remove(k);
+						BlopPositionJ.remove(k);
+					// Sinon la position i du joueur est > a la position i du monstre
+					} else {
+						// va vers le bas, si il y a du vide
+						if(donjon[i+1][j].equals(" ")) {
+							donjon[i+1][j] = "~";
+							donjon[i][j] = " ";
+							break;
+						// sinon 
+						} else {
+							notmovingBlop1 = true;
+							// si la position j du joueur est inferieur a celle du blop
+							if((((Joueur)joueur).getJ() <= j && ((Joueur)joueur).getI() != i)
+							|| (((Joueur)joueur).getJ() < j && ((Joueur)joueur).getI() == i)){
+								// si la case a gauche est vide, va a gauche
+								if(donjon[i][j-1].equals(" ")){
+									donjon[i][j-1] = "~";
+									donjon[i][j] = " ";
+									break;
+								// sinon si la case a droite est vide, va a droite
+								} else if(donjon[i][j+1].equals(" ")){
+									donjon[i][j+1] = "~";
+									donjon[i][j] = " ";
+									break;
+								} else {
+									notmovingBlop2 = true;
+								}
+							// sinon la position j du joueur est superieur a celle du blop
+							} else {
+								// si la case a droite est vide, va a droite
+								if(donjon[i][j+1].equals(" ")){
+									donjon[i][j+1] = "~";
+									donjon[i][j] = " ";
+									break;
+								// sinon si la case a gauche est vide, va a gauche
+								} else if(donjon[i][j-1].equals(" ")){
+									donjon[i][j-1] = "~";
+									donjon[i][j] = " ";
+									break;
+								} else {
+									notmovingBlop3 = true;
+								}
+							}
+							// Si le blop n'a pas trouvé de case vide en bas, a gauche, a droite et qu'il
+							// y en a une en haut, va en haut
+							if(notmovingBlop1 && notmovingBlop2 && notmovingBlop3 && donjon[i-1][j].equals(" ")) {
+								donjon[i-1][j] = "~";
+								donjon[i][j] = " ";
+								break;
+							} else {
+								notmovingBlop4 = true;
+							}
+						}
+						// si il n'y a aucune case vide dans les 4 directions
+						if(notmovingBlop1 && notmovingBlop2 && notmovingBlop3 && notmovingBlop4) {
+							// reste a la meme place et sort du switch
+							donjon[i][j] = "~";
+							break;
+						}
+					}
+				break;
+				// les Blop bougent de maniere aleatoire.
+				case 2:
+					while (!movingBlop) {
+						switch(randInt(1, 4)) {
+							case 1:
+								if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+									donjon[i][j] = "P";
+								// si la case au dessus de la position actuelle de Frank est vide
+								} else if(donjon[i-1][j].equals(" ")) {
+									// remplir la case au dessus avec un F
+									donjon[i-1][j] = "~";
+									// remplir la case actuelle avec du vide
+									donjon[i][j] = " ";
+									// si il a pas bu bouger passer le boolean a true pour sortir du while
+									movingBlop=true;
+								} else {
+									 // si il n'a pas bu bouger dans cette direction passer le boolean a true
+									notmovingBlop1 = true;
+								}
+								break;
+							case 2:
+								if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+									donjon[i][j] = "P";
+								} else if(donjon[i][j+1].equals(" ")) {
+									donjon[i][j+1] = "~";
+									donjon[i][j] = " ";
+									movingBlop=true;
+								} else {
+									notmovingBlop2 = true;
+								}
+								break;
+							case 3:
+								if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+									donjon[i][j] = "P";
+								} else if(donjon[i+1][j].equals(" ")) {
+									donjon[i+1][j] = "~";
+									donjon[i][j] = " ";
+									movingBlop=true;
+								} else {
+									notmovingBlop3 = true;
+								}
+								break;
+							case 4:
+								if ((((Joueur)joueur).getJ() == j) && (((Joueur)joueur).getI() == i)){
+									donjon[i][j] = "P";
+								} else if(donjon[i][j-1].equals(" ")) {
+									donjon[i][j-1] = "~";
+									donjon[i][j] = " ";
+									movingBlop=true;
+								} else {
+									notmovingBlop4 = true;
+								}
+								break;
+						}
+						// si il n'y a aucune case vide dans les 4 directions
+						if(notmovingBlop1 && notmovingBlop2 && notmovingBlop3 && notmovingBlop4) {
+							// rester a la meme place et sortir du while
+							donjon[i][j] = "~";
+							movingBlop=true;
+						}
+					}
+				break;
 			}
 		}
 	}
@@ -243,7 +478,7 @@ public class GestionDonjon {
 		diagonal(lignes, colonnes, (75*lignes)/100, 1,1,2);
 
 		// Recuperation des positions des monstres
-		getFrankPosition(30,30);
+		getMonstersPosition(30,30);
 		
 		// affichage de la carte
 		affichageCarte(donjon);
@@ -401,6 +636,7 @@ public class GestionDonjon {
     }
 
     public void deplacementJoueur() throws IOException {
+    	
     	if(monstersList.isEmpty()) {
     		objetsList.clear();
     		contenuSalle = ((Joueur)joueur).deplacer(donjon, joueur);
@@ -409,11 +645,14 @@ public class GestionDonjon {
 		else {
 			System.out.println("Il reste des monstres dans la salle. Tuez les pour avancer.");
 		}
-    	
-    	// Deplacement des frankenstein
-    	deplacementFrank(30, 30);
-    	// Update de la position des frankenstein
-		setFrankPosition(30,30);
+
+    	// Update de la position des monstres
+    	setMonstersPosition(30,30);
+    	// Deplacement des monstres
+    	deplacementFrank();
+    	deplacementBlop();
+    	// Update de la position des monstres
+    	setMonstersPosition(30,30);
 		
 		affichageCarte(donjon);
         menuJoueur();
