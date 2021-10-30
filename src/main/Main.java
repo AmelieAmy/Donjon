@@ -9,8 +9,10 @@ import donjon.Score;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		
 		Scanner in =new Scanner(System.in);
 		String choix = null;
+		
 		do {
 	        System.out.println("");
 	        System.out.println("-------------  MENU PRINCIPAL  -------------");
@@ -22,20 +24,22 @@ public class Main {
 	        System.out.println("Que voulez-vous faire ?");
 
 	        choix = in.next();
+	        
 	        switch(choix.toUpperCase()) {
-	        case "A":
-	        	Score score = new Score();
-	        	score.hightScore();
-	        	break;
-	        case "B":
-	        	GestionDonjon gestionDonjon = new GestionDonjon();
-	        	break;
-	        case "C":
-	        	System.out.println("Bye bye");
-	        	System.exit(0);
-	        	break;
+		        case "A":
+		        	Score score = new Score();
+		        	score.hightScore();
+		        	break;
+		        case "B":
+		        	GestionDonjon gestionDonjon = new GestionDonjon();
+		        	break;
+		        case "C":
+		        	System.out.println("Bye bye");
+		        	System.exit(0);
+		        	break;
 	        }
-		}while(choix.equalsIgnoreCase("A") || choix.equalsIgnoreCase("B"));
+	        
+		} while(choix.equalsIgnoreCase("A") || choix.equalsIgnoreCase("B"));
 		
 	}
 
