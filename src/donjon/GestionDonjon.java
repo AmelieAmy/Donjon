@@ -21,7 +21,7 @@ public class GestionDonjon {
 	private ArrayList<Integer> BlopPositionJ = new ArrayList<Integer>();
 	
 	public GestionDonjon() throws IOException {
-//		((Joueur) joueur).donnerPseudo();
+		((Joueur) joueur).donnerPseudo();
 		generationDonjon(30,30);
 		menuJoueur();
 	}
